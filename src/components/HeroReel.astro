@@ -1,0 +1,44 @@
+---
+/**
+ * Self-hosted muted-autoplay background reel for the hero.
+ *
+ * Drop the MP4 at public/videos/hero.mp4 (keep it under 10MB) and set
+ * `src="/videos/hero.mp4"`. While `src` is empty the component renders a
+ * styled dark gradient fallback — safe for placeholder builds.
+ *
+ * NOTE: autoplay requires `muted` + `playsinline`. Never remove those.
+ */
+interface Props {
+  /** Path to MP4, e.g. "/videos/hero.mp4". Leave empty for placeholder. */
+  src?: string;
+  /** Optional poster image path for the <video> tag. */
+  poster?: string;
+}
+
+const { src, poster } = Astro.props;
+const hasVideo = !!src;
+---
+
+<div
+  class="absolute inset-0 -z-10 bg-gradient-to-br from-[#0b0b0b] via-[#120f0d] to-[#1a120c]"
+>
+  {
+    hasVideo && (
+      <video
+        class="h-full w-full object-cover opacity-60"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={poster}
+        aria-hidden="true"
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    )
+  }
+  {/* Dark scrim on top of the video so foreground text stays legible */}
+  <div class="absolute inset-0 bg-gradient-to-t from-[color:var(--color-ink)] via-[color:var(--color-ink)]/40 to-transparent">
+  </div>
+</div>

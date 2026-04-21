@@ -1,0 +1,40 @@
+---
+/**
+ * Static three-column testimonials block (stacks on mobile). No carousel
+ * by design — carousels autoplay, dock a11y scores, and most visitors never
+ * click past the first slide.
+ */
+import { testimonials } from "~/data/testimonials";
+---
+
+<section
+  class="mx-auto max-w-[var(--container-max)] px-6 py-24"
+  aria-labelledby="testimonials-heading"
+>
+  <div class="mx-auto max-w-2xl text-center">
+    <p class="text-xs tracking-[0.3em] text-[color:var(--color-bone-soft)] uppercase">
+      Kind words
+    </p>
+    <h2 id="testimonials-heading" class="mt-4 font-serif text-4xl md:text-5xl">
+      From the couples who've lived it.
+    </h2>
+  </div>
+
+  <ul class="mt-16 grid gap-10 md:grid-cols-3">
+    {
+      testimonials.map((t) => (
+        <li class="flex flex-col border-t border-[color:var(--color-line)] pt-8">
+          <blockquote class="font-serif text-lg leading-[1.5] text-[color:var(--color-bone)]">
+            <span aria-hidden="true">"</span>{t.quote}<span aria-hidden="true">"</span>
+          </blockquote>
+          <footer class="mt-6 text-sm">
+            <p class="text-[color:var(--color-bone)]">{t.attribution}</p>
+            {t.context && (
+              <p class="mt-1 text-[color:var(--color-bone-soft)]">{t.context}</p>
+            )}
+          </footer>
+        </li>
+      ))
+    }
+  </ul>
+</section>

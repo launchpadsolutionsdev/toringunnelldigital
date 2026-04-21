@@ -1,0 +1,40 @@
+---
+/**
+ * Responsive 16:9 YouTube / Vimeo embed with lazy loading.
+ *
+ * Uses a cookieless host (`youtube-nocookie.com`) for YouTube to improve
+ * privacy posture and avoid third-party cookies on first paint.
+ * `loading="lazy"` defers the iframe until it's near the viewport.
+ */
+interface Props {
+  videoId: string;
+  platform: "youtube" | "vimeo";
+  title: string;
+  /** Optional autoplay + mute (only meaningful on user-initiated pages). */
+  autoplay?: boolean;
+}
+
+const { videoId, platform, title, autoplay = false } = Astro.props;
+
+const params = new URLSearchParams();
+if (autoplay) {
+  params.set("autoplay", "1");
+  params.set("mute", "1");
+}
+
+const src =
+  platform === "youtube"
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`
+    : `https://player.vimeo.com/video/${videoId}?${params.toString()}`;
+---
+
+<div class="relative aspect-video w-full overflow-hidden bg-[color:var(--color-ink-soft)]">
+  <iframe
+    src={src}
+    title={title}
+    loading="lazy"
+    class="absolute inset-0 h-full w-full"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
