@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Cinematic, dark, editorial.
+ * Keep a neutral palette — one warm accent. All values are placeholders we'll
+ * refine once a type pairing is locked in.
+ */
+@theme {
+  /* Palette */
+  --color-ink: #0b0b0b;          /* near-black page bg */
+  --color-ink-soft: #141414;     /* elevated surface */
+  --color-bone: #ece7df;         /* off-white text */
+  --color-bone-soft: #b8b3ac;    /* muted text */
+  --color-ember: #c98b5b;        /* warm accent (provisional) */
+  --color-line: #2a2a2a;         /* hairline dividers */
+
+  /* Typography — provisional, will be set by the type-preview step */
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+
+  /* Container + rhythm */
+  --container-prose: 68ch;
+  --container-max: 1280px;
+}
+
+/* Site defaults */
+html {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* Headings use the editorial serif */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Make focus visible everywhere for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

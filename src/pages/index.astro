@@ -1,0 +1,37 @@
+---
+/**
+ * Temporary landing page for step 1 — verifies scaffold renders. Will be
+ * replaced in step 3 with the real home page (hero reel, featured films,
+ * about teaser, testimonials).
+ */
+import Base from "~/layouts/Base.astro";
+import { SITE } from "~/config";
+---
+
+<Base title="Home" description={SITE.tagline}>
+  <section class="mx-auto max-w-[var(--container-max)] px-6 py-24">
+    <p class="text-xs tracking-[0.3em] text-[color:var(--color-bone-soft)] uppercase">
+      Scaffold — step 1 complete
+    </p>
+    <h1 class="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
+      {SITE.tagline}
+    </h1>
+    <p class="mt-8 max-w-xl text-lg text-[color:var(--color-bone-soft)]">
+      {SITE.description}
+    </p>
+    <div class="mt-12 flex items-center gap-4">
+      <a
+        href="/type-preview"
+        class="inline-flex items-center gap-2 border border-[color:var(--color-line)] px-5 py-3 text-sm tracking-wide uppercase transition-colors hover:border-[color:var(--color-ember)] hover:text-[color:var(--color-ember)]"
+      >
+        View type preview →
+      </a>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 bg-[color:var(--color-bone)] px-5 py-3 text-sm tracking-wide text-[color:var(--color-ink)] uppercase transition-colors hover:bg-[color:var(--color-ember)]"
+      >
+        Enquire
+      </a>
+    </div>
+  </section>
+</Base>

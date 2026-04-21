@@ -1,0 +1,6 @@
+# Render-style redirects file.
+# Populate with old Wix URL → new URL mappings before flipping DNS.
+# Format: <from>  <to>  <status>
+# Example:
+#   /weddings        /films          301
+#   /about-me        /about          301

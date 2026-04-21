@@ -1,0 +1,59 @@
+---
+import { SITE } from "~/config";
+
+const nav = [
+  { href: "/films", label: "Films" },
+  { href: "/about", label: "About" },
+  { href: "/packages", label: "Packages" },
+  { href: "/blog", label: "Journal" },
+  { href: "/contact", label: "Contact" },
+];
+
+const path = Astro.url.pathname;
+---
+
+<header class="border-b border-[color:var(--color-line)]">
+  <div
+    class="mx-auto flex max-w-[var(--container-max)] items-center justify-between gap-6 px-6 py-5"
+  >
+    <a href="/" class="flex items-center gap-3" aria-label={`${SITE.name} — home`}>
+      <img
+        src="/logo-light.png"
+        alt={`${SITE.name} logo`}
+        width="180"
+        height="60"
+        class="h-8 w-auto"
+        decoding="async"
+      />
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="flex items-center gap-6 text-sm tracking-wide uppercase">
+        {
+          nav.map((item) => {
+            const active =
+              item.href === "/"
+                ? path === "/"
+                : path === item.href || path.startsWith(`${item.href}/`);
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  class:list={[
+                    "transition-colors hover:text-[color:var(--color-ember)]",
+                    active
+                      ? "text-[color:var(--color-ember)]"
+                      : "text-[color:var(--color-bone-soft)]",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

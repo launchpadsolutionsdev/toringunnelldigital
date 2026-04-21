@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /type-preview
+
+Sitemap: https://toringunnelldigital.com/sitemap-index.xml

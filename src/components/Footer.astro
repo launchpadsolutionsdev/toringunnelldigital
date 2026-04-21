@@ -1,0 +1,48 @@
+---
+import { SITE } from "~/config";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-[color:var(--color-line)]">
+  <div
+    class="mx-auto grid max-w-[var(--container-max)] gap-10 px-6 py-14 md:grid-cols-3"
+  >
+    <div>
+      <p class="font-serif text-2xl">{SITE.name}</p>
+      <p class="mt-3 max-w-xs text-sm text-[color:var(--color-bone-soft)]">
+        {SITE.tagline}
+      </p>
+    </div>
+
+    <nav aria-label="Footer" class="text-sm">
+      <ul class="space-y-2 text-[color:var(--color-bone-soft)]">
+        <li><a class="hover:text-[color:var(--color-bone)]" href="/films">Films</a></li>
+        <li><a class="hover:text-[color:var(--color-bone)]" href="/about">About</a></li>
+        <li><a class="hover:text-[color:var(--color-bone)]" href="/packages">Packages</a></li>
+        <li><a class="hover:text-[color:var(--color-bone)]" href="/blog">Journal</a></li>
+        <li><a class="hover:text-[color:var(--color-bone)]" href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="text-sm">
+      <p class="text-[color:var(--color-bone-soft)]">Inquiries</p>
+      <a
+        href={`mailto:${SITE.email}`}
+        class="mt-1 inline-block hover:text-[color:var(--color-ember)]"
+      >
+        {SITE.email}
+      </a>
+      <p class="mt-4 text-[color:var(--color-bone-soft)]">
+        {SITE.location.city}, {SITE.location.region}
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="mx-auto flex max-w-[var(--container-max)] items-center justify-between border-t border-[color:var(--color-line)] px-6 py-6 text-xs text-[color:var(--color-bone-soft)]"
+  >
+    <p>© {year} {SITE.name}. All rights reserved.</p>
+    <p>Made in Thunder Bay.</p>
+  </div>
+</footer>

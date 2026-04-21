@@ -1,0 +1,14 @@
+---
+/**
+ * Emits a <script type="application/ld+json"> tag. Pass any JSON-serializable
+ * object as `data`; the component handles encoding.
+ */
+interface Props {
+  data: Record<string, unknown>;
+}
+
+const { data } = Astro.props;
+const json = JSON.stringify(data);
+---
+
+<script type="application/ld+json" is:inline set:html={json} />
