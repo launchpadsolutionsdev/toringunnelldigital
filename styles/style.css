@@ -308,6 +308,7 @@ html.announcement-dismissed .announcement { display: none; }
   text-transform: uppercase;
   letter-spacing: .22em;
   font-size: .68rem;
+  line-height: 1;        /* reset inherited 1.65 so flex-centering truly centers */
 }
 .announcement a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); }
 
@@ -490,8 +491,8 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 }
 .hero-title {
   color: var(--paper-on-dark);
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 1.04;
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  line-height: 1.1;
   letter-spacing: .01em;
 }
 /* Second line: lighter weight + italic, slightly larger for the romantic accent. */
