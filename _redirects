@@ -1,0 +1,20 @@
+# =============================================================================
+# Render redirect map — Torin Gunnell Digital  (CLAUDE.md §3.2, §9)
+# =============================================================================
+# Format:  /old-path   /new-path   301
+#
+# CRITICAL: before cutover, inventory the current Wix site's ranking URLs from
+# Google Search Console. Every old URL that ranks MUST resolve on the new site —
+# either it exists at the same path, or it 301-redirects here. An old ranking URL
+# that returns 404 is the one thing that actually kills rankings.
+#
+# Clean folder URLs (/contact/, /wedding-films/, etc.) are served automatically
+# by Render from each folder's index.html — those don't need an entry here.
+#
+# TODO: replace the examples below with the real old → new mappings.
+# -----------------------------------------------------------------------------
+
+# /portfolio        /wedding-films/    301
+# /pricing          /investment/       301
+# /about            /who-we-are/       301
+# /contact-us       /contact/          301
