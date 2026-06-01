@@ -540,6 +540,15 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .intro { text-align: center; }
 .intro .eyebrow { display: block; margin-bottom: 1.5rem; }
 .intro .lead { max-width: 24ch; margin-inline: auto; }
+
+/* Full-width, centered prose variant (collaboration section): wider, readable
+   measure for multi-sentence paragraphs rather than the one-line lead. */
+.intro--full .lead {
+  max-width: 60ch;
+  margin-inline: auto;
+  font-size: clamp(1.25rem, 2vw, 1.9rem);
+  line-height: 1.4;
+}
 .intro--wide .lead { max-width: 30ch; }
 .intro .btn { margin-top: 2.5rem; }
 
