@@ -578,6 +578,10 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
   gap: clamp(.75rem, 1.5vw, 1.25rem);
 }
 
+/* Embedded-trailer variant: card holds an inline Vimeo player (16:9) with the
+   couple/venue caption beneath. The .video-embed box already handles the ratio. */
+.film-card--embed .film-meta { margin-top: .9rem; }
+
 /* Full portfolio: asymmetric rows via explicit spans. */
 .portfolio-grid {
   display: grid;
