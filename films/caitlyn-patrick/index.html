@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<!--
+  FILM PAGE TEMPLATE (CLAUDE.md §4: /films/{slug}/)
+  Duplicate this folder per film: copy /films/template-film/ → /films/<slug>/
+  then fill in: <title>, description, canonical, couple name, venue, the Vimeo
+  embed (replace VIMEO_ID), the short story, and the stills (R2 URLs).
+  Lead with the Vimeo player; keep copy sparse; name the venue prominently.
+-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Caitlyn &amp; Patrick · Le Belvédère | Torin Gunnell Digital</title>
+<link rel="canonical" href="https://toringunnelldigital.com/films/caitlyn-patrick/" />
+<meta name="description" content="Caitlyn and Patrick's cinematic wedding film at Le Belvédère, an Ottawa cliffside wedding venue — by Torin Gunnell Digital." />
+
+<!-- STAGING: remove at cutover (CLAUDE.md §3). -->
+<meta name="robots" content="noindex, nofollow" />
+
+<meta name="theme-color" content="#f4efe7" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
+<link rel="preconnect" href="https://player.vimeo.com" />
+<link rel="stylesheet" href="/styles/style.css" />
+
+<meta property="og:type" content="video.other" />
+<meta property="og:title" content="Caitlyn &amp; Patrick · Le Belvédère" />
+<meta property="og:url" content="https://toringunnelldigital.com/films/caitlyn-patrick/" />
+<meta property="og:image" content="https://toringunnelldigital.com/images/social.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="announcement" role="region" aria-label="Announcement">
+    <p>Now booking 2026 &amp; 2027 weddings — <a href="/contact/">enquire early</a></p>
+    <button class="announcement-close" type="button" aria-label="Dismiss announcement"></button>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-group nav-group--left">
+      <a class="nav-link" href="/wedding-films/">Wedding Films</a>
+      <a class="nav-link" href="/investment/">Investment</a>
+    </div>
+    <a class="brand" href="/" aria-label="Torin Gunnell Digital — home">
+      <span class="brand-logo" aria-hidden="true"></span><span class="visually-hidden">Torin Gunnell Digital</span>
+    </a>
+    <div class="nav-group nav-group--right">
+      <a class="nav-link" href="/who-we-are/">Who We Are</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+    </div>
+    <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <a href="/wedding-films/">Wedding Films</a>
+    <a href="/investment/">Investment</a>
+    <a href="/who-we-are/">Who We Are</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+  <div class="mobile-meta"><a class="link-underline" href="/contact/">Enquire</a></div>
+</div>
+
+<main id="main">
+
+  <section class="container film-hero" style="padding-top: var(--space-md)">
+    <span class="eyebrow">Wedding Film</span>
+    <h1>Caitlyn <span class="amp">&amp;</span> Patrick</h1>
+    <p class="film-venue">Le Belvédère · Ottawa Cliffside Wedding Venue</p>
+  </section>
+
+  <!-- Lead with the film. Params strip Vimeo chrome to match brand. -->
+  <section class="container section--tight">
+    <div class="video-embed reveal">
+      <iframe
+        src="https://player.vimeo.com/video/1197464252?title=0&byline=0&portrait=0&dnt=1"
+        title="Caitlyn &amp; Patrick wedding film"
+        loading="lazy"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Short, sparse story. TODO: refine in Torin's voice. -->
+  <section class="section--tight container">
+    <div class="film-story prose reveal">
+      <p>Caitlyn and Patrick said their vows on the cliffside at Le Belvédère, the Gatineau hills opening up behind them. A warm, golden day — and a celebration that earned every bit of it.</p>
+    </div>
+  </section>
+
+  <!-- A few stills (R2). TODO: upload films/caitlyn-patrick/still-1.jpg & still-2.jpg -->
+  <section class="section--tight container">
+    <div class="stills-grid reveal" data-stagger>
+      <div class="media-box ratio-3-2 media-fill">
+        <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/films/caitlyn-patrick/still-1.jpg" alt="Caitlyn and Patrick during their cliffside ceremony at Le Belvédère" width="1280" height="853" loading="lazy" decoding="async" />
+      </div>
+      <div class="media-box ratio-3-2 media-fill">
+        <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/films/caitlyn-patrick/still-2.jpg" alt="Caitlyn and Patrick's reception at Le Belvédère" width="1280" height="853" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight container text-center">
+    <a class="link-underline" href="/wedding-films/">Back to all films</a>
+  </section>
+
+</main>
+
+<section class="footer-cta" aria-label="Get in touch">
+  <div class="media-box media-fill">
+    <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/home/cta.jpg" alt="Couple embracing under string lights at night" width="2560" height="1440" loading="lazy" decoding="async" />
+  </div>
+  <div class="footer-cta-inner reveal">
+    <h2>Planning something like this?</h2>
+    <a class="btn btn--light" href="/contact/">Enquire now</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="footer-brand brand" href="/" aria-label="Torin Gunnell Digital — home">
+        <span class="brand-logo" aria-hidden="true"></span><span class="visually-hidden">Torin Gunnell Digital</span>
+      </a>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="/wedding-films/">Wedding Films</a></li>
+            <li><a href="/investment/">Investment</a></li>
+            <li><a href="/who-we-are/">Who We Are</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Say hello</h3>
+          <ul>
+            <li><a href="mailto:torin.business.video@gmail.com">Email Torin</a></li>
+            <li><a href="/contact/">Enquiry form</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-social" aria-label="Social media">
+        <a href="#" aria-label="Instagram" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy;<span id="year">2026</span> Torin Gunnell Digital. All rights reserved.</p>
+      <p>Wedding &amp; event films · Thunder Bay, Ontario &amp; beyond.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/scripts.js" defer></script>
+</body>
+</html>
