@@ -361,24 +361,21 @@ html.announcement-dismissed .announcement { display: none; }
 .nav-link:hover::after,
 .nav-link[aria-current="page"]::after { transform: scaleX(1); }
 
-/* ---- Brand (text wordmark placeholder for delivered TGD monogram SVG) ---- */
-.brand { justify-self: center; text-align: center; line-height: 1; }
-.brand-mark {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.6rem;
-  letter-spacing: .08em;
-}
-.brand-sub {
+/* ---- Brand: TGD monogram SVG, masked so it inherits currentColor ----
+   Using the SVG as a CSS mask lets the single black-on-transparent file render
+   white over the dark hero and ink once the header goes solid — no per-page
+   inline SVG or separate light/dark files needed (CLAUDE.md §5). */
+.brand { justify-self: center; line-height: 0; display: inline-flex; }
+.brand-logo {
   display: block;
-  font-family: var(--font-ui);
-  text-transform: uppercase;
-  letter-spacing: .42em;
-  font-size: .54rem;
-  margin-top: .25em;
-  margin-left: .42em; /* optical balance for tracking */
-  opacity: .85;
+  width: 54px;
+  height: 54px;
+  background-color: currentColor;        /* the visible colour of the mark */
+  -webkit-mask: url("/TGD_logo.svg") center / contain no-repeat;
+          mask: url("/TGD_logo.svg") center / contain no-repeat;
+  transition: width var(--dur) var(--ease), height var(--dur) var(--ease);
 }
+/* Visually-hidden text label still lives inside .brand for screen readers. */
 
 /* ---- Hamburger ---- */
 .hamburger {
@@ -472,19 +469,38 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .hero video, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(28,26,23,.55) 0%, rgba(28,26,23,.12) 38%, rgba(28,26,23,0) 65%);
+  /* Even darkening so the centered headline stays legible over bright footage. */
+  background:
+    radial-gradient(ellipse at center, rgba(28,26,23,.28) 0%, rgba(28,26,23,.42) 100%),
+    linear-gradient(to top, rgba(28,26,23,.45) 0%, rgba(28,26,23,.1) 40%, rgba(28,26,23,.25) 100%);
   pointer-events: none;
 }
+/* Centered hero content (reference layout): eyebrow + stacked headline. */
+.hero { align-items: center; }
 .hero-inner {
   position: relative; z-index: 2;
   width: 100%; max-width: var(--container);
   margin-inline: auto;
   padding: var(--gutter);
-  padding-bottom: clamp(3rem, 8vh, 6.5rem);
+  text-align: center;
 }
-.hero h1 { color: var(--paper-on-dark); max-width: 16ch; }
-.hero .eyebrow { color: var(--paper-on-dark); opacity: .85; margin-bottom: 1.25rem; display: block; }
-.hero .hero-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero .eyebrow {
+  color: var(--paper-on-dark); opacity: .85;
+  margin-bottom: 1.5rem; display: block;
+}
+.hero-title {
+  color: var(--paper-on-dark);
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1.04;
+  letter-spacing: .01em;
+}
+/* Second line: lighter weight + italic, slightly larger for the romantic accent. */
+.hero-title em {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: .12em;
+}
 
 .scroll-cue {
   position: absolute; left: 50%; bottom: 1.5rem; z-index: 2;
@@ -723,7 +739,7 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
-.footer-brand .brand-mark { font-size: 1.4rem; }
+.footer-brand .brand-logo { width: 46px; height: 46px; }
 .footer-nav { display: flex; gap: clamp(2rem, 5vw, 4rem); flex-wrap: wrap; justify-content: center; }
 .footer-col h3 {
   font-family: var(--font-ui);
