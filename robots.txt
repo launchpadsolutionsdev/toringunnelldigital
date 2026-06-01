@@ -1,0 +1,19 @@
+# =============================================================================
+# robots.txt — Torin Gunnell Digital
+# =============================================================================
+# STAGING MODE (current): block all crawling while the site lives on the
+# temporary *.onrender.com URL so Google never indexes a duplicate (CLAUDE.md §3).
+#
+# AT CUTOVER (CLAUDE.md §3.4 / §10): replace everything below with the PRODUCTION
+# block at the bottom of this file, AND remove the `noindex` meta tag from every
+# page's <head>. Forgetting this is the #1 way to deindex the whole site.
+# -----------------------------------------------------------------------------
+
+User-agent: *
+Disallow: /
+
+# --- PRODUCTION (uncomment at launch, delete the staging block above) ---
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://toringunnelldigital.com/sitemap.xml

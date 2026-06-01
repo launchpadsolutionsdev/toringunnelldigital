@@ -1,0 +1,41 @@
+# =============================================================================
+# .gitignore — Torin Gunnell Digital
+# Enforces CLAUDE.md's hard rule: NO media files in Git. Photos/clips → R2,
+# full films → Vimeo. Only code + tiny static assets (logo SVG, favicons) belong.
+# =============================================================================
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Dependencies (not needed for this plain static build, but just in case)
+node_modules/
+
+# --- MEDIA: never commit (CLAUDE.md §2, §10) ---
+# Video
+*.mp4
+*.mov
+*.webm
+*.m4v
+*.avi
+# Wedding photos / large rasters (these live on Cloudflare R2, not Git)
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.avif
+*.psd
+*.tif
+*.tiff
+*.raw
+
+# Allow ONLY the small static brand assets that belong in the repo:
+!favicon-16.png
+!favicon-32.png
+!favicon-48.png
+!apple-touch-icon.png
+!images/social.jpg
+# (SVGs are not ignored — logo/icon SVGs are welcome.)
