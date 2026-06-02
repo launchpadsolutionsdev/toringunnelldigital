@@ -864,6 +864,33 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .boutique h2 { margin-bottom: 1.5rem; }
 .boutique .lead { margin-bottom: 2rem; }
 
+/* Destination: the elevated, full-bleed standout below the three packages. */
+.destination-band { min-height: 88vh; }
+.destination-band::after {
+  /* Deeper, more cinematic scrim than the standard feature-film. */
+  background: linear-gradient(to top, rgba(28,26,23,.75) 0%, rgba(28,26,23,.45) 50%, rgba(28,26,23,.55) 100%);
+}
+.destination-band .feature-inner { max-width: 56ch; }
+.destination-band .eyebrow {
+  color: var(--paper-on-dark);
+  opacity: .85;
+  display: block;
+  margin-bottom: 1.25rem;
+}
+.destination-title {
+  color: var(--paper-on-dark);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 1;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+.destination-band p {
+  color: var(--paper-on-dark);
+  opacity: .92;
+  margin: 0 auto 2rem;
+  max-width: 46ch;
+}
+
 .tier-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
