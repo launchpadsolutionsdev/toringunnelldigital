@@ -36,8 +36,9 @@
     var onScroll = function () {
       var y = window.pageYOffset;
 
-      // Solid background once we've moved past the hero (or always on inner pages).
-      if (y > solidAt) header.classList.add("is-solid");
+      // Solid background past the hero — but inner pages (no hero) stay solid
+      // always, so the header never goes white-on-paper and vanishes at the top.
+      if (!hasHero || y > solidAt) header.classList.add("is-solid");
       else header.classList.remove("is-solid");
 
       // Hide when scrolling down past the header; show when scrolling up.
