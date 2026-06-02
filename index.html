@@ -26,6 +26,7 @@
 
 <!-- Preconnect to the R2 media CDN (CLAUDE.md §6). TODO: confirm final R2 domain. -->
 <link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
+<link rel="preconnect" href="https://player.vimeo.com" />
 
 <link rel="stylesheet" href="/styles/style.css" />
 
@@ -120,7 +121,7 @@
       <div class="film-card film-card--embed">
         <div class="video-embed">
           <iframe
-            data-src="https://player.vimeo.com/video/1197720868?background=1&autoplay=1&muted=1&loop=1&dnt=1"
+            data-src="https://player.vimeo.com/video/1197720868?controls=0&muted=1&loop=1&dnt=1"
             title="Caitlyn &amp; Patrick wedding film"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen></iframe>
@@ -134,7 +135,7 @@
       <div class="film-card film-card--embed">
         <div class="video-embed">
           <iframe
-            data-src="https://player.vimeo.com/video/1197717818?background=1&autoplay=1&muted=1&loop=1&dnt=1"
+            data-src="https://player.vimeo.com/video/1197717818?controls=0&muted=1&loop=1&dnt=1"
             title="Holly &amp; Graham wedding film"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen></iframe>
@@ -148,7 +149,7 @@
       <div class="film-card film-card--embed">
         <div class="video-embed">
           <iframe
-            data-src="https://player.vimeo.com/video/1197721694?background=1&autoplay=1&muted=1&loop=1&dnt=1"
+            data-src="https://player.vimeo.com/video/1197721694?controls=0&muted=1&loop=1&dnt=1"
             title="Victoria &amp; Patrick wedding film"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen></iframe>
@@ -250,6 +251,8 @@
   </div>
 </footer>
 
+<!-- Vimeo Player SDK — drives hover-to-play on the featured film cards. -->
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="/js/scripts.js" defer></script>
 </body>
 </html>

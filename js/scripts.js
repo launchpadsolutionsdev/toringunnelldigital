@@ -153,25 +153,48 @@
     }
   }
 
-  // Lazy iframes (e.g. Vimeo trailers set to autoplay): swap data-src -> src
-  // the first time the iframe nears the viewport, then leave it alone. These are
-  // muted, looping background players, so we load once and let them keep looping —
-  // tearing the src down on scroll-away caused a black flash when scrolling back.
-  var lazyFrames = Array.prototype.slice.call(document.querySelectorAll("iframe[data-src]"));
-  if (lazyFrames.length) {
+  // Featured film cards (Vimeo): show a still frame, then play on hover and
+  // pause on mouse-leave — like a thumbnail that comes alive. Uses the Vimeo
+  // Player SDK. The iframe loads (data-src -> src) the first time it nears the
+  // viewport; once ready we seek to a frame and pause so it reads as a poster.
+  var embedCards = Array.prototype.slice.call(document.querySelectorAll(".film-card--embed"));
+  if (embedCards.length && window.Vimeo && window.Vimeo.Player) {
+    var initCard = function (card) {
+      var iframe = card.querySelector("iframe[data-src]");
+      if (!iframe || iframe.dataset.loaded) return;
+      iframe.src = iframe.dataset.src;
+      iframe.dataset.loaded = "1";
+
+      var player = new window.Vimeo.Player(iframe);
+      var ready = false;
+      // Prime: load, nudge to a frame for the thumbnail, then hold paused.
+      player.ready().then(function () {
+        ready = true;
+        player.setVolume(0);
+        player.setCurrentTime(0.1).catch(function () {});
+        player.pause().catch(function () {});
+      });
+
+      card.addEventListener("mouseenter", function () {
+        player.play().catch(function () {});
+      });
+      card.addEventListener("mouseleave", function () {
+        player.pause().catch(function () {});
+      });
+    };
+
     if ("IntersectionObserver" in window) {
-      var fio = new IntersectionObserver(function (entries) {
+      var cio = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            var f = entry.target;
-            if (!f.src) f.src = f.dataset.src;
-            fio.unobserve(f);
+            initCard(entry.target);
+            cio.unobserve(entry.target);
           }
         });
       }, { rootMargin: "300px 0px", threshold: 0.01 });
-      lazyFrames.forEach(function (f) { fio.observe(f); });
+      embedCards.forEach(function (c) { cio.observe(c); });
     } else {
-      lazyFrames.forEach(function (f) { f.src = f.dataset.src; });
+      embedCards.forEach(initCard);
     }
   }
 
