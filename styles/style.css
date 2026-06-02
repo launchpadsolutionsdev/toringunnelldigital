@@ -672,6 +672,9 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .film-card--embed .video-embed { aspect-ratio: 4 / 3; }
 /* Full-width embed cards (e.g. portfolio feature) read better as 16:9. */
 .film-card--embed.span-6 .video-embed { aspect-ratio: 16 / 9; }
+
+/* Standard interactive player card (real Vimeo controls + sound, clickable). */
+.film-card--player .video-embed { aspect-ratio: 16 / 9; }
 /* Hover-to-play affordance. */
 .film-card--embed { cursor: pointer; }
 .film-card--embed iframe { pointer-events: none; } /* hover drives play, not the player UI */
