@@ -174,6 +174,46 @@
     }
   }
 
+  // Wedding-films player cards: cover each Vimeo player with its own thumbnail
+  // at rest (hiding Vimeo's resting play button), then fade the cover on hover
+  // to reveal the native player + controls. The poster is fetched from Vimeo's
+  // oEmbed endpoint. Once a film is started (poster clicked) it stays revealed.
+  var coverCards = Array.prototype.slice.call(document.querySelectorAll(".film-card--player"));
+  coverCards.forEach(function (card) {
+    var iframe = card.querySelector(".video-embed iframe");
+    if (!iframe || !iframe.src) return;
+
+    // Pull the numeric video id from the player URL.
+    var m = iframe.src.match(/video\/(\d+)/);
+    if (!m) return;
+    var videoUrl = "https://vimeo.com/" + m[1];
+
+    var poster = document.createElement("div");
+    poster.className = "video-poster";
+    iframe.parentNode.appendChild(poster);
+
+    // Get a large thumbnail (no API key needed).
+    fetch("https://vimeo.com/api/oembed.json?url=" + encodeURIComponent(videoUrl) + "&width=1280")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.thumbnail_url) {
+          // Ask Vimeo for a larger, crop-friendly version of the thumb.
+          var url = data.thumbnail_url.replace(/-d_\d+x\d+$/, "-d_1280x720");
+          poster.style.backgroundImage = "url('" + url + "')";
+          card.classList.add("has-cover");
+        }
+      })
+      .catch(function () {});
+
+    // Click the poster → reveal + start the film with sound.
+    poster.addEventListener("click", function () {
+      poster.classList.add("is-hidden");
+      if (iframe.src.indexOf("autoplay=1") === -1) {
+        iframe.src += (iframe.src.indexOf("?") === -1 ? "?" : "&") + "autoplay=1";
+      }
+    });
+  });
+
   // Featured film cards (Vimeo): show a still frame, then play on hover and
   // pause on mouse-leave — like a thumbnail that comes alive. Uses the Vimeo
   // Player SDK. The iframe loads (data-src -> src) the first time it nears the
