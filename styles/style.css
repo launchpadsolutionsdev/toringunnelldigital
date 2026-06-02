@@ -151,6 +151,10 @@ p:last-child { margin-bottom: 0; }
 /* Trim the bottom whitespace below the brand statement before the about teaser. */
 .brand-statement { padding-bottom: var(--space-md); }
 
+/* Tighten the gap between the filmmaker teaser and the investment preview. */
+.section--pair-top { padding-bottom: var(--space-md); }
+.section--pair-bottom { padding-top: var(--space-md); }
+
 /* ---- Investment preview: text + button left, staggered images right ---- */
 .invest-preview-grid {
   display: grid;
