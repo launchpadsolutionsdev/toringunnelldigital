@@ -787,6 +787,8 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
   align-items: center;
 }
 .split-row--reverse .split-media { order: 2; }
+.split-row--top { align-items: start; }
+.split-row--top .split-text { max-width: none; }
 .split-text { max-width: 46ch; }
 .split-text p { margin-top: 1.25rem; }
 
