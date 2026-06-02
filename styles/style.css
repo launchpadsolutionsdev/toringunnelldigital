@@ -748,6 +748,81 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .invest-intro { text-align: center; max-width: 56ch; margin-inline: auto; }
 .invest-intro .eyebrow { display: block; margin-bottom: 1rem; }
 
+/* Hero subhead + a wider centered measure for the editorial intro. */
+.hero-sub { color: var(--paper-on-dark); opacity: .9; margin-top: 1rem; font-size: 1.05rem; }
+.measure-wide { max-width: 50ch; }
+
+/* Collections intro: heading left, body + includes list right. */
+.collections-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: start;
+}
+.collections-body p { margin-bottom: 1rem; }
+.includes-list {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-top: .5rem;
+}
+.includes-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-family: var(--font-ui);
+  letter-spacing: .02em;
+}
+.includes-list li::before {
+  content: "";
+  position: absolute; left: 0; top: .65em;
+  width: 8px; height: 1px; background: var(--accent);
+}
+
+/* Deliverable split rows: square image one side, text the other. */
+.deliverables { display: flex; flex-direction: column; gap: var(--space-lg); }
+.split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+.split-row--reverse .split-media { order: 2; }
+.split-text { max-width: 46ch; }
+.split-text p { margin-top: 1.25rem; }
+
+/* Accent section heading used on the deliverable rows. */
+.title-accent {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.1;
+}
+
+/* Testimonial over a full-bleed media feature (reuses .feature-film). */
+.testimonial-feature { min-height: 70vh; }
+.testimonial-feature .feature-inner { max-width: 60ch; }
+.testimonial blockquote, .testimonial { margin: 0; }
+.testimonial p {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1.3;
+  color: var(--paper-on-dark);
+}
+.testimonial cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .72rem;
+  color: var(--paper-on-dark);
+  opacity: .85;
+}
+
+/* Boutique closing statement. */
+.boutique h2 { margin-bottom: 1.5rem; }
+.boutique .lead { margin-bottom: 2rem; }
+
 .tier-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -903,6 +978,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 /* ---- Mobile ---- */
+/* Investment page: stack the split layouts on narrower screens. */
+@media (max-width: 800px) {
+  .collections-intro { grid-template-columns: 1fr; }
+  .split-row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .split-row--reverse .split-media { order: 0; }
+  .split-text { max-width: none; }
+}
+
 @media (max-width: 680px) {
   .featured-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: 1fr; }
