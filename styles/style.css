@@ -304,6 +304,7 @@ html.js .stagger.is-visible > * { transition-delay: var(--d, 0ms); }
 html.announcement-dismissed .announcement { display: none; }
 
 .announcement p {
+  margin: 0;             /* drop base 1em bottom margin that offset flex centering */
   font-family: var(--font-ui);
   text-transform: uppercase;
   letter-spacing: .22em;
