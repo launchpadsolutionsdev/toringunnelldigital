@@ -544,10 +544,10 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 /* Full-width, centered prose variant (collaboration section): wider, readable
    measure for multi-sentence paragraphs rather than the one-line lead. */
 .intro--full .lead {
-  max-width: 76ch;
+  max-width: 22ch;
   margin-inline: auto;
-  font-size: clamp(1.25rem, 2vw, 1.9rem);
-  line-height: 1.4;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  line-height: 1.18;
 }
 .intro--wide .lead { max-width: 30ch; }
 .intro .btn { margin-top: 2.5rem; }
