@@ -186,13 +186,10 @@
       iframe.dataset.loaded = "1";
 
       var player = new window.Vimeo.Player(iframe);
-      var ready = false;
-      // Prime: load, nudge to a frame for the thumbnail, then hold paused.
+      // Leave the player un-started so it displays the thumbnail set in Vimeo
+      // (seeking would instead show the actual frame at that timestamp).
       player.ready().then(function () {
-        ready = true;
         player.setVolume(0);
-        player.setCurrentTime(0.1).catch(function () {});
-        player.pause().catch(function () {});
       });
 
       card.addEventListener("mouseenter", function () {
