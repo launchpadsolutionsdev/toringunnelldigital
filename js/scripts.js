@@ -174,43 +174,6 @@
     }
   }
 
-  // Play-on-click film cards (.film-card--play): a chrome-free silent Vimeo
-  // preview loops in the background; clicking our own play button swaps the
-  // iframe to a full player with sound + controls. No Vimeo play button/title.
-  var playCards = Array.prototype.slice.call(document.querySelectorAll(".film-card--play"));
-  if (playCards.length) {
-    var loadPreview = function (card) {
-      var iframe = card.querySelector(".film-preview");
-      if (iframe && !iframe.src && iframe.dataset.src) iframe.src = iframe.dataset.src;
-    };
-
-    // Load the silent preview when the card nears the viewport.
-    if ("IntersectionObserver" in window) {
-      var pio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { loadPreview(entry.target); pio.unobserve(entry.target); }
-        });
-      }, { rootMargin: "300px 0px", threshold: 0.01 });
-      playCards.forEach(function (c) { pio.observe(c); });
-    } else {
-      playCards.forEach(loadPreview);
-    }
-
-    // Click → swap to a full player (autoplay, sound, controls).
-    playCards.forEach(function (card) {
-      var btn = card.querySelector(".film-play");
-      if (!btn) return;
-      btn.addEventListener("click", function () {
-        var id = card.getAttribute("data-film");
-        var iframe = card.querySelector(".film-preview");
-        if (!id || !iframe) return;
-        iframe.src = "https://player.vimeo.com/video/" + id +
-          "?autoplay=1&title=0&byline=0&portrait=0&dnt=1";
-        card.classList.add("is-playing");
-      });
-    });
-  }
-
   // Featured film cards (Vimeo): show a still frame, then play on hover and
   // pause on mouse-leave — like a thumbnail that comes alive. Uses the Vimeo
   // Player SDK. The iframe loads (data-src -> src) the first time it nears the
