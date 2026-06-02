@@ -70,13 +70,10 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" aria-label="Investment">
     <div class="media-box media-fill">
-      <div class="bg-vimeo">
-        <iframe
-          data-src="https://player.vimeo.com/video/1197775631?background=1&muted=1&loop=1&autoplay=1&dnt=1"
-          title="Investment hero reel"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
+      <!-- Muted background reel from R2 (loaded by JS when in view). -->
+      <video data-bg-video class="hero-reel" muted loop playsinline preload="none" aria-hidden="true">
+        <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/home/Packages-Section.mp4" type="video/mp4" />
+      </video>
     </div>
     <div class="hero-inner reveal">
       <span class="eyebrow">Investment</span>
