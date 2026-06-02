@@ -153,6 +153,29 @@
     }
   }
 
+  // Lazy iframes (e.g. Vimeo trailers set to autoplay): swap data-src -> src
+  // only when the iframe scrolls into view, so the player starts on scroll and
+  // doesn't load/play while off-screen. Drop the src when it leaves view to stop it.
+  var lazyFrames = Array.prototype.slice.call(document.querySelectorAll("iframe[data-src]"));
+  if (lazyFrames.length) {
+    if ("IntersectionObserver" in window) {
+      var fio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var f = entry.target;
+          if (entry.isIntersecting) {
+            if (!f.src) f.src = f.dataset.src;
+          } else if (f.src) {
+            // Stop playback when scrolled away by tearing down the player.
+            f.src = "";
+          }
+        });
+      }, { rootMargin: "100px 0px", threshold: 0.25 });
+      lazyFrames.forEach(function (f) { fio.observe(f); });
+    } else {
+      lazyFrames.forEach(function (f) { f.src = f.dataset.src; });
+    }
+  }
+
   // Hover-to-play film card clips.
   var hoverCards = Array.prototype.slice.call(document.querySelectorAll(".film-card"));
   hoverCards.forEach(function (card) {
