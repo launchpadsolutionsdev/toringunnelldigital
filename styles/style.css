@@ -151,6 +151,48 @@ p:last-child { margin-bottom: 0; }
 /* Trim the bottom whitespace below the brand statement before the about teaser. */
 .brand-statement { padding-bottom: var(--space-md); }
 
+/* ---- Investment preview: two vertical images flanking a centered teaser ---- */
+.invest-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+}
+.invest-img { width: 100%; }
+/* Offset the flanking images for an editorial, non-templated feel. */
+.invest-img--left { transform: translateY(-2rem); }
+.invest-img--right { transform: translateY(2rem); }
+
+.invest-preview-text .statement { margin-bottom: 2rem; }
+.invest-preview-eyebrow { display: block; margin-bottom: 1rem; }
+.invest-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 2rem;
+}
+.invest-preview-list a {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  position: relative;
+  display: inline-block;
+  transition: color var(--dur) var(--ease);
+}
+.invest-preview-list a:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .invest-preview-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "text text"
+      "imgL imgR";
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+  .invest-preview-text { grid-area: text; margin-bottom: 1rem; }
+  .invest-img--left { grid-area: imgL; transform: none; }
+  .invest-img--right { grid-area: imgR; transform: none; }
+}
+
 /* Uppercase eyebrow / label / nav micro-type (Jost, wide tracking). */
 .eyebrow {
   font-family: var(--font-ui);
