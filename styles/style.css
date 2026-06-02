@@ -840,7 +840,7 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 
 /* Testimonial over a full-bleed media feature (reuses .feature-film). */
 .testimonial-feature { min-height: 70vh; }
-.testimonial-feature .feature-inner { max-width: 60ch; }
+.testimonial-feature .feature-inner { max-width: 78ch; }
 .testimonial blockquote, .testimonial { margin: 0; }
 .testimonial p {
   font-family: var(--font-display);
