@@ -154,22 +154,21 @@
   }
 
   // Lazy iframes (e.g. Vimeo trailers set to autoplay): swap data-src -> src
-  // only when the iframe scrolls into view, so the player starts on scroll and
-  // doesn't load/play while off-screen. Drop the src when it leaves view to stop it.
+  // the first time the iframe nears the viewport, then leave it alone. These are
+  // muted, looping background players, so we load once and let them keep looping —
+  // tearing the src down on scroll-away caused a black flash when scrolling back.
   var lazyFrames = Array.prototype.slice.call(document.querySelectorAll("iframe[data-src]"));
   if (lazyFrames.length) {
     if ("IntersectionObserver" in window) {
       var fio = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          var f = entry.target;
           if (entry.isIntersecting) {
+            var f = entry.target;
             if (!f.src) f.src = f.dataset.src;
-          } else if (f.src) {
-            // Stop playback when scrolled away by tearing down the player.
-            f.src = "";
+            fio.unobserve(f);
           }
         });
-      }, { rootMargin: "100px 0px", threshold: 0.25 });
+      }, { rootMargin: "300px 0px", threshold: 0.01 });
       lazyFrames.forEach(function (f) { fio.observe(f); });
     } else {
       lazyFrames.forEach(function (f) { f.src = f.dataset.src; });
