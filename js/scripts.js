@@ -153,6 +153,26 @@
     }
   }
 
+  // Background Vimeo iframes (.bg-vimeo): autoplaying muted cover loops. Load
+  // data-src -> src once when they near the viewport.
+  var bgFrames = Array.prototype.slice.call(document.querySelectorAll(".bg-vimeo iframe[data-src]"));
+  if (bgFrames.length) {
+    if ("IntersectionObserver" in window) {
+      var bfio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var f = entry.target;
+            if (!f.src) f.src = f.dataset.src;
+            bfio.unobserve(f);
+          }
+        });
+      }, { rootMargin: "300px 0px", threshold: 0.01 });
+      bgFrames.forEach(function (f) { bfio.observe(f); });
+    } else {
+      bgFrames.forEach(function (f) { f.src = f.dataset.src; });
+    }
+  }
+
   // Featured film cards (Vimeo): show a still frame, then play on hover and
   // pause on mouse-leave — like a thumbnail that comes alive. Uses the Vimeo
   // Player SDK. The iframe loads (data-src -> src) the first time it nears the
