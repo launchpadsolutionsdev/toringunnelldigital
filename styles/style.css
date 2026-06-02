@@ -571,6 +571,27 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .section-head { text-align: center; margin-bottom: var(--space-lg); }
 .section-head .eyebrow { display: block; margin-bottom: 1rem; }
 
+/* Left-aligned uppercase label with a hairline rule extending to the right. */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: var(--space-md);
+  font-family: var(--font-ui);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .78rem;
+  color: var(--ink);
+}
+.section-label span { flex: 0 0 auto; }
+.section-label::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--line);
+}
+
 /* Featured 3-up strip on the home page. */
 .featured-grid {
   display: grid;
