@@ -148,6 +148,9 @@ p:last-child { margin-bottom: 0; }
 .statement em,
 .accent-text { color: var(--accent); font-style: italic; }
 
+/* Trim the bottom whitespace below the brand statement before the about teaser. */
+.brand-statement { padding-bottom: var(--space-md); }
+
 /* Uppercase eyebrow / label / nav micro-type (Jost, wide tracking). */
 .eyebrow {
   font-family: var(--font-ui);
