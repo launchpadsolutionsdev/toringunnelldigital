@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
 <link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
+<link rel="preconnect" href="https://player.vimeo.com" />
 <link rel="stylesheet" href="/styles/style.css" />
 
 <meta property="og:type" content="website" />
@@ -77,16 +78,19 @@
   <section class="section--tight container">
     <div class="portfolio-grid reveal" data-stagger>
 
-      <a class="film-card span-6" href="/films/template-film/">
-        <div class="media-box ratio-16-9 media-fill">
-          <img class="poster" src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/films/film-one/preview.jpg" alt="Placeholder feature film — couple at sunset" width="1920" height="1080" loading="lazy" decoding="async" />
-          <video class="hover-clip" muted loop playsinline preload="none"><source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/films/film-one/hover.mp4" type="video/mp4" /></video>
+      <div class="film-card film-card--embed span-6">
+        <div class="video-embed">
+          <iframe
+            data-src="https://player.vimeo.com/video/1197734436?controls=0&muted=1&loop=1&dnt=1"
+            title="Caitlyn &amp; Patrick wedding film"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen></iframe>
         </div>
         <div class="film-meta">
-          <p class="film-couple">Couple One</p>
-          <p class="film-venue">Venue Name · Region</p>
+          <p class="film-couple">Caitlyn <span class="amp">&amp;</span> Patrick</p>
+          <p class="film-venue">Le Belvédère · Ottawa Cliffside Wedding Venue</p>
         </div>
-      </a>
+      </div>
 
       <a class="film-card span-3" href="/films/template-film/">
         <div class="media-box ratio-5-4 media-fill">
@@ -193,6 +197,7 @@
   </div>
 </footer>
 
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="/js/scripts.js" defer></script>
 </body>
 </html>

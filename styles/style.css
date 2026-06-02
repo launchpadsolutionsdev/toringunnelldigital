@@ -670,6 +670,8 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
    this film was shot 4:3, so its box matches to avoid pillarbox bars. */
 .film-card--embed .film-meta { margin-top: .9rem; }
 .film-card--embed .video-embed { aspect-ratio: 4 / 3; }
+/* Full-width embed cards (e.g. portfolio feature) read better as 16:9. */
+.film-card--embed.span-6 .video-embed { aspect-ratio: 16 / 9; }
 /* Hover-to-play affordance. */
 .film-card--embed { cursor: pointer; }
 .film-card--embed iframe { pointer-events: none; } /* hover drives play, not the player UI */
