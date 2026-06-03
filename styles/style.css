@@ -741,8 +741,8 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 }
 
 /* Hover-to-reveal: a thumbnail covers the player (hiding Vimeo's resting
-   button); it fades out on hover/focus so the native player + controls show.
-   JS adds .has-cover once the poster image is set. */
+   button). On first hover or click, JS adds .is-hidden so it fades out and
+   STAYS gone — the player keeps showing even after the mouse leaves. */
 .film-card--player .video-poster {
   position: absolute; inset: 0; z-index: 2;
   background-size: cover;
@@ -751,8 +751,6 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
   opacity: 1;
   transition: opacity var(--dur) var(--ease);
 }
-.film-card--player.has-cover:hover .video-poster,
-.film-card--player.has-cover:focus-within .video-poster,
 .film-card--player .video-poster.is-hidden { opacity: 0; pointer-events: none; }
 
 .film-story { max-width: 60ch; margin-inline: auto; text-align: center; }

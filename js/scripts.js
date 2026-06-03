@@ -205,7 +205,11 @@
       })
       .catch(function () {});
 
-    // Click the poster → reveal + start the film with sound.
+    // Reveal the player on first hover and keep it revealed (don't re-cover on
+    // mouse-leave). Clicking also reveals and starts the film with sound.
+    card.addEventListener("mouseenter", function () {
+      poster.classList.add("is-hidden");
+    });
     poster.addEventListener("click", function () {
       poster.classList.add("is-hidden");
       if (iframe.src.indexOf("autoplay=1") === -1) {
