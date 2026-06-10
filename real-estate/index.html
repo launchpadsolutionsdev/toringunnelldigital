@@ -11,14 +11,14 @@
 <!-- STAGING: remove at cutover (CLAUDE.md §3). -->
 <meta name="robots" content="noindex, nofollow" />
 
-<meta name="theme-color" content="#0a0a0a" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <!-- R2 media CDN (CLAUDE.md §6). -->
 <link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
@@ -38,7 +38,7 @@
 <!-- Service structured data: ties the real-estate offering to the main business. -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Real estate photography and videography","name":"Real Estate Media — Torin Gunnell Digital","description":"Listing photography, cinematic property films, aerial photo and video, and social-ready reels for real estate agents in Thunder Bay, Ontario.","provider":{"@id":"https://toringunnelldigital.com/#business"},"areaServed":{"@type":"City","name":"Thunder Bay"},"url":"https://toringunnelldigital.com/real-estate/"}</script>
 </head>
-<body class="has-hero re-page">
+<body class="re-page">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ===================== HEADER (shared across pages) ===================== -->
@@ -80,24 +80,23 @@
 <main id="main">
 
   <!-- ===================== HERO ===================== -->
-  <section class="hero re-hero" aria-label="Real estate showreel">
-    <div class="media-box media-fill">
-      <!-- TODO (Torin): upload a real-estate hero poster + loop to R2 at these paths. -->
-      <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-poster.jpg" alt="Aerial view of a waterfront home in Thunder Bay at dusk" width="2560" height="1440" fetchpriority="high" loading="eager" decoding="async" />
-      <video data-bg-video class="hero-reel" muted loop playsinline preload="none" aria-hidden="true">
-        <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-reel.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="hero-inner reveal" data-stagger>
+  <section class="re-hero container" aria-label="Real estate showreel">
+    <div class="re-hero-copy reveal" data-stagger>
       <span class="re-pill"><span class="re-pill-dot" aria-hidden="true"></span>Thunder Bay Real Estate Media</span>
-      <h1 class="hero-title">Listings that<br><span class="re-accent-text">stop the scroll</span></h1>
+      <h1 class="re-h1">Listings that<br><span class="re-accent-text">stop the scroll</span></h1>
       <p class="re-hero-sub">Cinematic listing films. Magazine-grade photography. Licensed aerial. Built to win the listing — and the buyer's attention.</p>
       <div class="re-hero-actions">
         <a class="btn btn--accent" href="#work">See the work</a>
         <a class="btn" href="#pricing">Packages</a>
       </div>
     </div>
-    <a class="scroll-cue" href="#services" aria-label="Scroll to services">Photo · Video · Aerial</a>
+    <div class="re-hero-media media-box ratio-16-9 media-fill reveal">
+      <!-- TODO (Torin): upload a real-estate hero poster + loop to R2 at these paths. -->
+      <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-poster.jpg" alt="Aerial view of a waterfront home in Thunder Bay at dusk" width="2560" height="1440" fetchpriority="high" loading="eager" decoding="async" />
+      <video data-bg-video muted loop playsinline preload="none" aria-hidden="true">
+        <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-reel.mp4" type="video/mp4" />
+      </video>
+    </div>
   </section>
 
   <!-- ===================== SERVICE MARQUEE ===================== -->
@@ -414,7 +413,7 @@
     <div class="container re-inquire-grid">
       <div class="re-inquire-intro reveal">
         <span class="eyebrow">Book a shoot</span>
-        <h2>Your next listing, impossible to ignore.</h2>
+        <h2>Your next listing, <span class="re-accent-text">impossible to ignore.</span></h2>
         <div class="prose">
           <p>Send the property details and what you need — I reply personally, usually the same business day.</p>
         </div>
