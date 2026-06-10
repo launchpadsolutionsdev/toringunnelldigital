@@ -88,7 +88,7 @@
         <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-reel.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="hero-inner reveal">
+    <div class="hero-inner reveal" data-stagger>
       <span class="eyebrow">Torin Gunnell Digital · Thunder Bay Real Estate Media</span>
       <h1 class="hero-title">Media that sells the home<br><em>before the showing</em></h1>
       <p class="re-hero-sub">Cinematic listing films, magazine-grade photography, and licensed aerial coverage — built to win listings and stop the scroll.</p>
@@ -99,6 +99,25 @@
     </div>
     <a class="scroll-cue" href="#services" aria-label="Scroll to services">Photo · Video · Aerial</a>
   </section>
+
+  <!-- ===================== SERVICE MARQUEE ===================== -->
+  <!-- Decorative scrolling strip (CSS-only; pauses for reduced motion). -->
+  <div class="re-marquee" aria-hidden="true">
+    <div class="re-marquee-track">
+      <span>Listing Films</span><span class="re-dot">·</span>
+      <span>MLS Photography</span><span class="re-dot">·</span>
+      <span>Aerial</span><span class="re-dot">·</span>
+      <span>Twilight</span><span class="re-dot">·</span>
+      <span>Social Reels</span><span class="re-dot">·</span>
+      <span>Agent Branding</span><span class="re-dot">·</span>
+      <span>Listing Films</span><span class="re-dot">·</span>
+      <span>MLS Photography</span><span class="re-dot">·</span>
+      <span>Aerial</span><span class="re-dot">·</span>
+      <span>Twilight</span><span class="re-dot">·</span>
+      <span>Social Reels</span><span class="re-dot">·</span>
+      <span>Agent Branding</span><span class="re-dot">·</span>
+    </div>
+  </div>
 
   <!-- ===================== SERVICES ===================== -->
   <section class="section section--tight container" id="services">
@@ -162,31 +181,37 @@
       </figure>
 
       <figure class="re-tile re-tile--tall">
-        <div class="re-video ratio-9-16 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play social reel"></button>
+        <div class="re-phone">
+          <div class="re-video ratio-9-16 media-fill">
+            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03-poster.jpg">
+              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03.mp4" type="video/mp4" />
+            </video>
+            <button class="re-play" type="button" aria-label="Play social reel"></button>
+          </div>
         </div>
         <figcaption class="re-tile-meta">Teaser Reel · Current River</figcaption>
       </figure>
 
       <figure class="re-tile re-tile--tall">
-        <div class="re-video ratio-9-16 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play social reel"></button>
+        <div class="re-phone">
+          <div class="re-video ratio-9-16 media-fill">
+            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04-poster.jpg">
+              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04.mp4" type="video/mp4" />
+            </video>
+            <button class="re-play" type="button" aria-label="Play social reel"></button>
+          </div>
         </div>
         <figcaption class="re-tile-meta">Teaser Reel · Westfort</figcaption>
       </figure>
 
       <figure class="re-tile re-tile--tall">
-        <div class="re-video ratio-9-16 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play social reel"></button>
+        <div class="re-phone">
+          <div class="re-video ratio-9-16 media-fill">
+            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05-poster.jpg">
+              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05.mp4" type="video/mp4" />
+            </video>
+            <button class="re-play" type="button" aria-label="Play social reel"></button>
+          </div>
         </div>
         <figcaption class="re-tile-meta">Agent Brand Reel</figcaption>
       </figure>
@@ -204,15 +229,20 @@
     </div>
   </section>
 
+  <!-- ===================== STATEMENT BAND ===================== -->
+  <section class="section container re-statement-section">
+    <p class="statement re-statement reveal">Six years of wedding films taught me how to make people feel something in sixty seconds. <em>Now imagine that pointed at your listing.</em></p>
+  </section>
+
   <!-- ===================== STATS BAND ===================== -->
   <section class="re-stats" aria-label="Experience">
     <div class="container re-stats-grid reveal" data-stagger>
       <div class="re-stat">
-        <span class="re-stat-num">6+</span>
+        <span class="re-stat-num" data-count="6" data-suffix="+">6+</span>
         <span class="re-stat-label">Years behind the camera</span>
       </div>
       <div class="re-stat">
-        <span class="re-stat-num">100+</span>
+        <span class="re-stat-num" data-count="100" data-suffix="+">100+</span>
         <span class="re-stat-label">Shoots delivered</span>
       </div>
       <div class="re-stat">

@@ -22,8 +22,25 @@
   --soft-dark: rgba(244, 239, 231, .62);
 }
 
+/* ---- True child stagger ----
+   scripts.js already assigns each child of [data-stagger] an incremental
+   --d delay; here the children actually animate with it (scoped to this
+   page so wedding pages are untouched). */
+html.js .re-page [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s var(--ease) var(--d, 0ms), transform .7s var(--ease) var(--d, 0ms);
+}
+html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .re-page [data-stagger] > * { opacity: 1; transform: none; }
+}
+
 /* ---- Hero ---- */
 .re-hero { min-height: 92svh; }
+/* Bolder than the wedding hero — this audience responds to confidence. */
+.re-hero .hero-title { font-size: clamp(2.2rem, 5.5vw, 5rem); }
+.re-hero .hero-title em { color: #c9a978; }   /* brightened brass for contrast over footage */
 .re-hero-sub {
   color: var(--paper-on-dark);
   opacity: .9;
@@ -37,6 +54,36 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2.25rem;
+}
+
+/* ---- Service marquee: slow editorial ticker under the hero ----
+   The track holds the word list twice; animating to -50% loops seamlessly. */
+.re-marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line-dark);
+  padding-block: clamp(1rem, 2vw, 1.6rem);
+}
+.re-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  width: max-content;
+  animation: re-marquee 36s linear infinite;
+}
+.re-marquee-track span {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+  white-space: nowrap;
+  color: var(--paper-on-dark);
+  opacity: .85;
+}
+.re-marquee-track .re-dot { color: var(--accent); opacity: 1; }
+@keyframes re-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .re-marquee-track { animation: none; }
 }
 
 /* ---- Services (4-up numbered cards) ---- */
@@ -131,6 +178,40 @@
   margin-left: -6px;
 }
 
+/* Tile hover: the footage leans in, the caption warms up. */
+.re-video video { transition: transform .8s var(--ease); }
+.re-tile:hover .re-video video { transform: scale(1.04); }
+.re-tile-meta { transition: color var(--dur) var(--ease); }
+.re-tile:hover .re-tile-meta { color: var(--accent); }
+
+/* ---- Phone frame around vertical reels ----
+   Pure CSS device shell so social cuts read instantly as social content. */
+.re-phone {
+  border: 1px solid rgba(244, 239, 231, .22);
+  border-radius: clamp(1.6rem, 2.4vw, 2.4rem);
+  padding: clamp(.5rem, .8vw, .75rem);
+  background: #110f0d;
+  box-shadow: 0 36px 70px -36px rgba(0, 0, 0, .85);
+  position: relative;
+}
+.re-phone .re-video {
+  border-radius: clamp(1.1rem, 1.8vw, 1.8rem);
+}
+.re-phone::after {
+  /* notch pill */
+  content: "";
+  position: absolute;
+  top: clamp(1rem, 1.6vw, 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26%;
+  height: 12px;
+  background: #110f0d;
+  border-radius: 999px;
+  z-index: 3;
+  pointer-events: none;
+}
+
 .re-tile-meta {
   margin-top: .8rem;
   font-family: var(--font-ui);
@@ -139,6 +220,19 @@
   font-size: .68rem;
   color: var(--soft-dark);
 }
+.re-tile--tall .re-tile-meta { text-align: center; }
+
+/* ---- Statement band ---- */
+.re-statement-section {
+  padding-block: var(--space-lg);
+  text-align: center;
+}
+.re-statement {
+  color: var(--paper-on-dark);
+  max-width: 26ch;
+  margin-inline: auto;
+}
+.re-statement em { color: #c9a978; }
 
 /* ---- Stats band ---- */
 .re-stats {
@@ -212,8 +306,15 @@
   padding: clamp(1.75rem, 3vw, 2.75rem);
   display: flex;
   flex-direction: column;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.re-package:hover {
+  transform: translateY(-6px);
+  border-color: rgba(244, 239, 231, .4);
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, .9);
 }
 .re-package--featured { border-color: var(--accent); }
+.re-package--featured:hover { border-color: var(--accent); }
 .re-flag {
   position: absolute;
   top: 0; right: clamp(1.75rem, 3vw, 2.75rem);

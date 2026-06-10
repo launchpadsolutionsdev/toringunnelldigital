@@ -11,6 +11,43 @@
 (function () {
   "use strict";
 
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------------------------------------------------------------------
+     Stats band: count numbers up from zero the first time they scroll in.
+     Markup: <span class="re-stat-num" data-count="100" data-suffix="+">100+</span>
+     (The final value is already in the HTML, so no JS = correct numbers.)
+  --------------------------------------------------------------------------- */
+  var statNums = Array.prototype.slice.call(document.querySelectorAll(".re-stat-num[data-count]"));
+  if (statNums.length && !reduceMotion && "IntersectionObserver" in window) {
+    var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var animate = function (el) {
+      var target = parseInt(el.dataset.count, 10);
+      var suffix = el.dataset.suffix || "";
+      var duration = 1200;
+      var start = null;
+      var tick = function (now) {
+        if (start === null) start = now;
+        var t = Math.min((now - start) / duration, 1);
+        el.textContent = Math.round(ease(t) * target) + suffix;
+        if (t < 1) window.requestAnimationFrame(tick);
+      };
+      window.requestAnimationFrame(tick);
+    };
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          sio.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    statNums.forEach(function (el) { sio.observe(el); });
+  }
+
+  /* ---------------------------------------------------------------------------
+     Work gallery tiles.
+  --------------------------------------------------------------------------- */
   var tiles = Array.prototype.slice.call(document.querySelectorAll(".re-video"));
   if (!tiles.length) return;
 
