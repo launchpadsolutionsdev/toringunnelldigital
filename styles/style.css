@@ -411,6 +411,17 @@ html.announcement-dismissed .announcement { display: none; }
 .nav-link:hover::after,
 .nav-link[aria-current="page"]::after { transform: scaleX(1); }
 
+/* Real Estate: a small outlined button so realtors spot their entrance without
+   the wedding nav losing its quiet. Inherits currentColor, so it reads paper
+   over dark heroes and ink once the header goes solid. */
+.nav-link--cta {
+  border: 1px solid currentColor;
+  padding: .55em 1.1em;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.nav-link--cta::after { content: none; }   /* no underline — the border is the affordance */
+.nav-link--cta:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
 /* ---- Brand: TGD monogram SVG, masked so it inherits currentColor ----
    Using the SVG as a CSS mask lets the single black-on-transparent file render
    white over the dark hero and ink once the header goes solid — no per-page

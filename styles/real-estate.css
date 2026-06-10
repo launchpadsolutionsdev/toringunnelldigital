@@ -1,0 +1,392 @@
+/* =============================================================================
+   Torin Gunnell Digital — Real Estate page (/real-estate/)
+   -----------------------------------------------------------------------------
+   Loaded AFTER style.css, only on the real-estate page. Everything is scoped
+   under .re-page so the wedding site is untouched. Same design tokens, same
+   type system — inverted to the dark palette so the page reads bolder and
+   more commercial while staying unmistakably TGD.
+   ========================================================================== */
+
+/* ---- Page base: dark ground, paper type ---- */
+.re-page {
+  background: var(--dark);
+  color: var(--paper-on-dark);
+}
+.re-page h1, .re-page h2, .re-page h3 { color: var(--paper-on-dark); }
+.re-page .section-label { color: var(--paper-on-dark); }
+.re-page .section-label::after { background: rgba(244, 239, 231, .18); }
+
+/* Dark-page hairline + soft-text equivalents of --line / --ink-soft. */
+.re-page {
+  --line-dark: rgba(244, 239, 231, .16);
+  --soft-dark: rgba(244, 239, 231, .62);
+}
+
+/* ---- Hero ---- */
+.re-hero { min-height: 92svh; }
+.re-hero-sub {
+  color: var(--paper-on-dark);
+  opacity: .9;
+  max-width: 52ch;
+  margin: 1.5rem auto 0;
+  font-size: 1.05rem;
+}
+.re-hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.25rem;
+}
+
+/* ---- Services (4-up numbered cards) ---- */
+.re-services {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.re-service {
+  border: 1px solid var(--line-dark);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+.re-service-num {
+  font-family: var(--font-ui);
+  letter-spacing: .26em;
+  font-size: .68rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.25rem;
+}
+.re-service h3 { font-size: clamp(1.3rem, 1.8vw, 1.7rem); margin-bottom: .75rem; }
+.re-service p { color: var(--soft-dark); font-size: .95rem; }
+
+/* ---- Work gallery ----
+   6-col grid: two 16:9 tiles (span 3), three vertical reels (span 2),
+   one full-width feature (span 6). Mirrors the wedding portfolio's
+   asymmetric, designed-not-templated feel. */
+.re-gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+}
+.re-tile { margin: 0; }
+.re-tile--wide { grid-column: span 3; }
+.re-tile--tall { grid-column: span 2; }
+.re-tile--full { grid-column: span 6; }
+
+.ratio-9-16 { aspect-ratio: 9 / 16; }
+
+.re-video {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #26221d, #1c1a17);
+}
+.re-video video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Play/pause affordance: brass ring + triangle, fades while playing. */
+.re-play {
+  position: absolute; inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--dur) var(--ease), background var(--dur) var(--ease);
+  background: rgba(28, 26, 23, .18);
+}
+.re-play::before {
+  content: "";
+  width: 64px; height: 64px;
+  border: 1px solid rgba(244, 239, 231, .85);
+  border-radius: 50%;
+  background:
+    linear-gradient(to right, transparent, transparent) center / 0 0 no-repeat;
+  position: absolute;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.re-play::after {
+  content: "";
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent rgba(244, 239, 231, .95);
+  margin-left: 4px;
+  transition: border-left-color var(--dur) var(--ease);
+}
+.re-play:hover::before { transform: scale(1.08); border-color: var(--accent); }
+.re-play:hover::after { border-left-color: var(--accent); }
+
+/* While playing, the overlay steps aside (still clickable to pause). */
+.re-video.is-playing .re-play { opacity: 0; background: transparent; }
+.re-video.is-playing .re-play:hover { opacity: 1; background: rgba(28, 26, 23, .25); }
+.re-video.is-playing .re-play::after {
+  /* pause glyph: two bars via box-shadow on a thin rect */
+  border: 0;
+  width: 5px; height: 20px;
+  background: rgba(244, 239, 231, .95);
+  box-shadow: 10px 0 0 rgba(244, 239, 231, .95);
+  margin-left: -6px;
+}
+
+.re-tile-meta {
+  margin-top: .8rem;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .68rem;
+  color: var(--soft-dark);
+}
+
+/* ---- Stats band ---- */
+.re-stats {
+  border-block: 1px solid var(--line-dark);
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+.re-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  text-align: center;
+}
+.re-stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1;
+  color: var(--paper-on-dark);
+}
+.re-stat-label {
+  display: block;
+  margin-top: .6rem;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .64rem;
+  color: var(--soft-dark);
+}
+
+/* ---- Process steps ---- */
+.re-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  counter-reset: none;
+}
+.re-step { position: relative; padding-top: 1.5rem; }
+.re-step::before {
+  content: "";
+  position: absolute; top: 0; left: 0;
+  width: 2.5rem; height: 1px;
+  background: var(--accent);
+}
+.re-step-num {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  font-size: .64rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: .75rem;
+}
+.re-step h3 { font-size: clamp(1.25rem, 1.8vw, 1.6rem); margin-bottom: .6rem; }
+.re-step p { color: var(--soft-dark); font-size: .95rem; }
+
+/* ---- Pricing ---- */
+.re-pricing-intro {
+  max-width: 52ch;
+  color: var(--soft-dark);
+  margin-bottom: var(--space-md);
+}
+.re-pricing {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: start;
+}
+.re-package {
+  position: relative;
+  border: 1px solid var(--line-dark);
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+}
+.re-package--featured { border-color: var(--accent); }
+.re-flag {
+  position: absolute;
+  top: 0; right: clamp(1.75rem, 3vw, 2.75rem);
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .6rem;
+  padding: .45em 1em;
+}
+.re-package h3 { font-size: clamp(1.5rem, 2.2vw, 2rem); margin-bottom: .6rem; }
+.re-package-desc { color: var(--soft-dark); font-size: .92rem; min-height: 3.2em; }
+.re-package-price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+  color: var(--paper-on-dark);
+}
+.re-package-price span {
+  display: block;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .6rem;
+  color: var(--soft-dark);
+  margin-bottom: .4rem;
+}
+.re-package-btn { margin-top: 1.75rem; align-self: flex-start; }
+.re-custom-note {
+  margin-top: var(--space-md);
+  color: var(--soft-dark);
+  font-size: .95rem;
+}
+.re-custom-note a {
+  color: var(--paper-on-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  transition: color var(--dur) var(--ease);
+}
+.re-custom-note a:hover { color: var(--accent); }
+
+/* ---- <details> styling (packages + FAQ) ---- */
+.re-page details {
+  border-top: 1px solid var(--line-dark);
+  padding: .85rem 0;
+}
+.re-page details:last-of-type { border-bottom: 1px solid var(--line-dark); }
+.re-page summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: .92rem;
+  letter-spacing: .02em;
+  transition: color var(--dur) var(--ease);
+}
+.re-page summary::-webkit-details-marker { display: none; }
+.re-page summary::after {
+  content: "+";
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--accent);
+  flex: 0 0 auto;
+  transition: transform var(--dur) var(--ease);
+}
+.re-page details[open] summary::after { transform: rotate(45deg); }
+.re-page summary:hover { color: var(--accent); }
+.re-page details p {
+  margin: .75rem 0 .25rem;
+  color: var(--soft-dark);
+  font-size: .9rem;
+}
+
+/* FAQ: a roomier single column. */
+.re-faq { max-width: 70ch; }
+.re-faq summary { font-size: 1rem; padding-block: .35rem; }
+
+/* ---- Realtors grid ---- */
+.re-realtors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+}
+.re-realtor {
+  border: 1px solid var(--line-dark);
+  padding: 1.5rem 1.75rem;
+}
+.re-realtor-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.15;
+  color: var(--paper-on-dark);
+  margin-bottom: .35rem;
+}
+.re-realtor-brokerage {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .64rem;
+  color: var(--soft-dark);
+}
+.re-realtor--cta {
+  display: block;
+  border-color: var(--accent);
+  transition: background var(--dur) var(--ease);
+}
+.re-realtor--cta:hover { background: rgba(154, 123, 79, .12); }
+.re-realtor--cta .re-realtor-brokerage { color: var(--accent); }
+
+/* ---- Testimonial ---- */
+.re-quote-section { padding-block: var(--space-lg); }
+.re-quote { margin: 0; max-width: 72ch; }
+.re-quote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1.3;
+  color: var(--paper-on-dark);
+}
+.re-quote cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .68rem;
+  color: var(--soft-dark);
+}
+
+/* ---- Inquiry: paper panel on the dark page ---- */
+.re-inquire {
+  background: var(--bg);
+  color: var(--ink);
+}
+.re-inquire h2 { color: var(--ink); }
+.re-inquire-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+.re-inquire-intro .eyebrow { display: block; margin-bottom: 1rem; }
+.re-inquire-intro h2 { margin-bottom: 1.5rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .re-services { grid-template-columns: repeat(2, 1fr); }
+  .re-steps { grid-template-columns: repeat(2, 1fr); }
+  .re-pricing { grid-template-columns: 1fr; }
+  .re-package-desc { min-height: 0; }
+  .re-realtors { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .re-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .re-inquire-grid { grid-template-columns: 1fr; }
+  .re-gallery { grid-template-columns: repeat(2, 1fr); }
+  .re-tile--wide, .re-tile--full { grid-column: span 2; }
+  .re-tile--tall { grid-column: span 1; }
+}
+
+@media (max-width: 520px) {
+  .re-services { grid-template-columns: 1fr; }
+  .re-steps { grid-template-columns: 1fr; }
+  .re-realtors { grid-template-columns: 1fr; }
+  .re-gallery { grid-template-columns: 1fr; }
+  .re-tile--tall { grid-column: span 1; }
+}
