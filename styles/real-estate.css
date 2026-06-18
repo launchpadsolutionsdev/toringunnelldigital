@@ -146,7 +146,7 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
+  align-items: stretch;
 }
 .re-h1 {
   font-size: clamp(2.75rem, 7vw, 6.25rem);
@@ -239,14 +239,35 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   border-radius: clamp(1rem, 2vw, 1.5rem);
   overflow: hidden;
 }
-/* Hero reel (right column): a phone mockup, width-capped so it doesn't tower
-   over the copy. Hidden on mobile — see responsive block. */
+/* Hero reel (right column): a phone mockup that fills the full height of the
+   hero. The screen stays an exact 9:16 (height-driven) so no letterbox bars.
+   Hidden on mobile — see responsive block. */
 .re-hero-figure {
-  width: 100%;
-  max-width: 300px;
-  margin-inline: auto;
+  display: flex;
+  min-width: 0;
 }
-.re-hero-reel { margin: 0; }
+.re-hero-reel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+.re-hero-reel .re-phone {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  width: auto;
+}
+.re-hero-reel .re-phone .re-video {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  aspect-ratio: 9 / 16;   /* width follows the stretched height — exact 9:16 */
+}
+.re-hero-reel .re-tile-meta { flex: 0 0 auto; }
 
 /* ---- Service marquee: outlined block type, monochrome ---- */
 .re-marquee {
