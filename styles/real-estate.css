@@ -790,29 +790,27 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: .6rem 1.5rem;
+  gap: .75rem;
 }
 .re-testimonial-links a {
-  position: relative;
-  padding-bottom: 2px;
-  font-family: var(--font-grotesk);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  font-size: .64rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--re-line);
+  border-radius: 50%;
   color: var(--re-ink);
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.re-testimonial-links a::after {
-  content: "";
-  position: absolute;
-  left: 0; bottom: 0;
-  width: 100%; height: 1px;
-  background: var(--re-grad);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur) var(--ease);
+.re-testimonial-links a:hover {
+  background: var(--re-ink);
+  border-color: var(--re-ink);
+  color: #ffffff;
+  transform: translateY(-2px);
 }
-.re-testimonial-links a:hover::after { transform: scaleX(1); }
+.re-testimonial-links svg { width: 18px; height: 18px; display: block; }
 
 /* ---- Inquiry: the black block at the end ---- */
 .re-inquire {
