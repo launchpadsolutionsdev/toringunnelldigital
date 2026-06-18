@@ -23,6 +23,10 @@
 <!-- R2 media CDN (CLAUDE.md §6). -->
 <link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
 
+<!-- Vimeo player (vertical reel embeds). -->
+<link rel="preconnect" href="https://player.vimeo.com" />
+<link rel="preconnect" href="https://i.vimeocdn.com" />
+
 <link rel="stylesheet" href="/styles/style.css" />
 <link rel="stylesheet" href="/styles/real-estate.css" />
 
@@ -140,14 +144,14 @@
 
   <!-- ===================== WORK GALLERY ===================== -->
   <!--
-    GALLERY: vertical reels only — each tile is a 9:16 phone mockup you click
-    to play. To add a piece of work:
-      1. Export a compressed vertical (9:16) MP4 + a JPG poster frame.
-      2. Upload both to the R2 bucket under /real-estate/.
-      3. Duplicate a <figure> below and swap the poster URL, the source
-         data-src URL, and the caption. Keep the "re-tile--tall" class and the
-         re-phone / ratio-9-16 box so it stays a vertical mockup.
-    Videos don't download until someone presses play, so add as many as needed.
+    GALLERY: vertical reels only — each tile is a 9:16 phone mockup holding a
+    Vimeo player. To add a piece of work:
+      1. Upload the vertical (9:16) reel to Vimeo.
+      2. Duplicate a <figure> below, swap the player video ID in the iframe
+         src, and update the iframe title + the figcaption.
+      Keep the "re-tile--tall" class and the re-phone / ratio-9-16 box so it
+      stays a vertical mockup.
+    The films stream from Vimeo, so nothing heavy lives in the repo.
   -->
   <section class="section container" id="work">
     <h2 class="section-label reveal"><span>Recent work</span></h2>
@@ -156,37 +160,28 @@
       <figure class="re-tile re-tile--tall">
         <div class="re-phone">
           <div class="re-video ratio-9-16 media-fill">
-            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03-poster.jpg">
-              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-03.mp4" type="video/mp4" />
-            </video>
-            <button class="re-play" type="button" aria-label="Play social reel"></button>
+            <iframe src="https://player.vimeo.com/video/1202548567?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="477 Highway 586 listing reel — Nelson Pasciullo" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
-        <figcaption class="re-tile-meta">Teaser Reel · Current River</figcaption>
+        <figcaption class="re-tile-meta">477 Highway 586 · Nelson Pasciullo</figcaption>
       </figure>
 
       <figure class="re-tile re-tile--tall">
         <div class="re-phone">
           <div class="re-video ratio-9-16 media-fill">
-            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04-poster.jpg">
-              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-04.mp4" type="video/mp4" />
-            </video>
-            <button class="re-play" type="button" aria-label="Play social reel"></button>
+            <iframe src="https://player.vimeo.com/video/1202549456?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="3281 Fairview Avenue listing reel — Kelsey Belluz" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
-        <figcaption class="re-tile-meta">Teaser Reel · Westfort</figcaption>
+        <figcaption class="re-tile-meta">3281 Fairview Avenue · Kelsey Belluz</figcaption>
       </figure>
 
       <figure class="re-tile re-tile--tall">
         <div class="re-phone">
           <div class="re-video ratio-9-16 media-fill">
-            <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05-poster.jpg">
-              <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-05.mp4" type="video/mp4" />
-            </video>
-            <button class="re-play" type="button" aria-label="Play social reel"></button>
+            <iframe src="https://player.vimeo.com/video/1202551153?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="50 Water Street, Suite 501 listing reel — Vince Mirabelli" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
-        <figcaption class="re-tile-meta">Agent Brand Reel</figcaption>
+        <figcaption class="re-tile-meta">50 Water Street, Suite 501 · Vince Mirabelli</figcaption>
       </figure>
 
     </div>
