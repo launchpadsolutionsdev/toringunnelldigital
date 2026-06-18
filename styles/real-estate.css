@@ -265,6 +265,9 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
 .re-service p { color: var(--re-grey); font-size: .95rem; }
 
 /* ---- Work gallery ---- */
+/* No heading here, so it doesn't need the full section padding — tighten the
+   space above and below the reels. */
+.re-page #work.section { padding-block: clamp(2rem, 4vw, 3.5rem); }
 .re-gallery {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
