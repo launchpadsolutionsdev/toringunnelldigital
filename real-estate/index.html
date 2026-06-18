@@ -90,13 +90,6 @@
         <a class="btn" href="#pricing">Packages</a>
       </div>
     </div>
-    <div class="re-hero-media media-box ratio-16-9 media-fill reveal">
-      <!-- TODO (Torin): upload a real-estate hero poster + loop to R2 at these paths. -->
-      <img src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-poster.jpg" alt="Aerial view of a waterfront home in Thunder Bay at dusk" width="2560" height="1440" fetchpriority="high" loading="eager" decoding="async" />
-      <video data-bg-video muted loop playsinline preload="none" aria-hidden="true">
-        <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/hero-reel.mp4" type="video/mp4" />
-      </video>
-    </div>
   </section>
 
   <!-- ===================== SERVICE MARQUEE ===================== -->
@@ -147,37 +140,18 @@
 
   <!-- ===================== WORK GALLERY ===================== -->
   <!--
-    GALLERY: each tile is a click-to-play video. To add a piece of work:
-      1. Export a compressed MP4 + a JPG poster frame.
+    GALLERY: vertical reels only — each tile is a 9:16 phone mockup you click
+    to play. To add a piece of work:
+      1. Export a compressed vertical (9:16) MP4 + a JPG poster frame.
       2. Upload both to the R2 bucket under /real-estate/.
       3. Duplicate a <figure> below and swap the poster URL, the source
-         data-src URL, and the caption. Use class "re-tile--tall" (and the
-         ratio-9-16 box) for vertical reels.
+         data-src URL, and the caption. Keep the "re-tile--tall" class and the
+         re-phone / ratio-9-16 box so it stays a vertical mockup.
     Videos don't download until someone presses play, so add as many as needed.
   -->
   <section class="section container" id="work">
     <h2 class="section-label reveal"><span>Recent work</span></h2>
     <div class="re-gallery reveal" data-stagger>
-
-      <figure class="re-tile re-tile--wide">
-        <div class="re-video ratio-16-9 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-01-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-01.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play listing film"></button>
-        </div>
-        <figcaption class="re-tile-meta">Lakefront Estate · Shuniah</figcaption>
-      </figure>
-
-      <figure class="re-tile re-tile--wide">
-        <div class="re-video ratio-16-9 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-02-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-02.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play listing film"></button>
-        </div>
-        <figcaption class="re-tile-meta">Modern Build · River Terrace</figcaption>
-      </figure>
 
       <figure class="re-tile re-tile--tall">
         <div class="re-phone">
@@ -213,16 +187,6 @@
           </div>
         </div>
         <figcaption class="re-tile-meta">Agent Brand Reel</figcaption>
-      </figure>
-
-      <figure class="re-tile re-tile--full">
-        <div class="re-video ratio-16-9 media-fill">
-          <video muted loop playsinline preload="none" poster="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-06-poster.jpg">
-            <source data-src="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev/real-estate/work-06.mp4" type="video/mp4" />
-          </video>
-          <button class="re-play" type="button" aria-label="Play listing film"></button>
-        </div>
-        <figcaption class="re-tile-meta">Signature Listing Film · Lake Superior Waterfront</figcaption>
       </figure>
 
     </div>
