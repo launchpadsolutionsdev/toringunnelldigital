@@ -1,12 +1,11 @@
 /* =============================================================================
    Torin Gunnell Digital — Real Estate page behaviour
    -----------------------------------------------------------------------------
-   Only loaded on /real-estate/. Drives the work-gallery tiles:
-     - videos stay as posters (preload="none") until someone presses play
-     - first play swaps source data-src -> src, unmutes, and starts the loop
-     - pressing again pauses; starting one tile pauses all the others
-   The shared scripts.js still handles the header, reveal animations, and the
-   hero background reel.
+   Only loaded on /real-estate/:
+     - counts the stat numbers up when they scroll into view
+     - adds a mute/unmute button to each Vimeo reel (via the Vimeo Player SDK);
+       unmuting one reel mutes the rest so audio never overlaps
+   The shared scripts.js still handles the header and reveal animations.
    ========================================================================== */
 (function () {
   "use strict";
@@ -46,53 +45,53 @@
   }
 
   /* ---------------------------------------------------------------------------
-     Work gallery tiles.
+     Reel volume toggle.
+     The reels autoplay muted (Vimeo background mode). Each gets a mute/unmute
+     button driven by the Vimeo Player SDK; unmuting one reel mutes the others
+     so audio never overlaps.
   --------------------------------------------------------------------------- */
-  var tiles = Array.prototype.slice.call(document.querySelectorAll(".re-video"));
-  if (!tiles.length) return;
+  if (window.Vimeo && window.Vimeo.Player) {
+    var ICON_OFF = '<svg class="ic-off" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.83-.54 2.64l1.51 1.51A8.8 8.8 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18z"/></svg>';
+    var ICON_ON = '<svg class="ic-on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
 
-  function pauseTile(tile) {
-    var video = tile.querySelector("video");
-    if (video && !video.paused) video.pause();
-    tile.classList.remove("is-playing");
+    var boxes = Array.prototype.slice.call(document.querySelectorAll(".re-video"));
+    var reels = [];
+
+    boxes.forEach(function (box) {
+      var iframe = box.querySelector("iframe");
+      if (!iframe) return;
+
+      var player = new window.Vimeo.Player(iframe);
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "re-mute";
+      btn.innerHTML = ICON_OFF + ICON_ON;
+      box.appendChild(btn);
+
+      var entry = { box: box, player: player, mute: null };
+
+      entry.mute = function (m) {
+        player.setMuted(m).catch(function () {});
+        box.classList.toggle("is-muted", m);
+        btn.setAttribute("aria-pressed", String(!m));
+        btn.setAttribute("aria-label", m ? "Unmute video" : "Mute video");
+      };
+      entry.mute(true);
+      reels.push(entry);
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var isMuted = box.classList.contains("is-muted");
+        if (isMuted) {
+          reels.forEach(function (o) { if (o !== entry) o.mute(true); });
+          entry.mute(false);
+          player.setVolume(1).catch(function () {});
+          var p = player.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          entry.mute(true);
+        }
+      });
+    });
   }
-
-  tiles.forEach(function (tile) {
-    var video = tile.querySelector("video");
-    var button = tile.querySelector(".re-play");
-    if (!video || !button) return;
-
-    button.addEventListener("click", function () {
-      if (tile.classList.contains("is-playing")) {
-        pauseTile(tile);
-        return;
-      }
-
-      // One at a time — quiet the rest of the gallery.
-      tiles.forEach(function (other) { if (other !== tile) pauseTile(other); });
-
-      // Lazy-load the file on first play (CLAUDE.md §6 hover-video pattern).
-      var source = video.querySelector("source[data-src]");
-      if (source && !source.src) {
-        source.src = source.dataset.src;
-        video.load();
-      }
-
-      // Listing films are scored — play with sound once the viewer asks for it.
-      video.muted = false;
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
-      tile.classList.add("is-playing");
-
-      button.setAttribute("aria-label", "Pause video");
-    });
-
-    video.addEventListener("pause", function () {
-      tile.classList.remove("is-playing");
-      button.setAttribute("aria-label", "Play video");
-    });
-    video.addEventListener("play", function () {
-      tile.classList.add("is-playing");
-    });
-  });
 })();
