@@ -520,6 +520,12 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   padding: .5em 1em;
   border-radius: 999px;
 }
+/* Soft flag: muted, for the availability tag — doesn't compete with "Most popular". */
+.re-flag--soft {
+  background: var(--re-bg);
+  color: var(--re-grey);
+  border: 1px solid var(--re-line);
+}
 .re-package h3 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); margin-bottom: .6rem; }
 .re-package-desc { color: var(--re-grey); font-size: .92rem; min-height: 3.2em; }
 .re-package-price {
@@ -540,6 +546,15 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   font-size: .6rem;
   color: var(--re-grey);
   margin-bottom: .5rem;
+}
+/* Word-based price (custom quote) reads smaller than the dollar figures. */
+.re-package-price--custom { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+/* Availability note under the Essentials price. */
+.re-package-note {
+  margin: -.75rem 0 0;
+  color: var(--re-grey);
+  font-size: .8rem;
+  line-height: 1.4;
 }
 .re-package-btn { margin-top: 1.75rem; align-self: flex-start; }
 .re-custom-note {
