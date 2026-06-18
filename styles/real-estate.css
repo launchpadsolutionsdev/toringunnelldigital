@@ -187,6 +187,53 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   flex-wrap: wrap;
   margin-top: 2.25rem;
 }
+/* Credibility stat row under the CTAs. */
+.re-hero-stats {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+.re-hero-stats li { display: flex; flex-direction: column; }
+.re-hero-stats li + li {
+  padding-left: clamp(1.25rem, 3vw, 2.25rem);
+  border-left: 1px solid var(--re-line);
+}
+.re-hero-stat-num {
+  font-family: var(--font-block);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+  line-height: 1;
+  color: var(--re-ink);
+}
+.re-hero-stat-label {
+  margin-top: .4rem;
+  font-family: var(--font-grotesk);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .6rem;
+  color: var(--re-grey);
+}
+/* Trusted-by line. */
+.re-hero-trust {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  font-family: var(--font-grotesk);
+  font-size: .85rem;
+  color: var(--re-ink);
+}
+.re-hero-trust span {
+  display: block;
+  margin-bottom: .4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .6rem;
+  color: var(--re-grey);
+}
 .re-hero-media {
   margin-top: clamp(2.5rem, 5vw, 4rem);
   border-radius: clamp(1rem, 2vw, 1.5rem);
