@@ -289,6 +289,12 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   object-fit: cover;
   transition: transform .8s var(--ease);
 }
+/* Vimeo embeds fill the phone screen. */
+.re-video iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
 .re-tile:hover .re-video video { transform: scale(1.04); }
 
 /* Play/pause overlay: white glyphs over a soft dark scrim so they read on
@@ -329,8 +335,11 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   margin-left: -6px;
 }
 
-/* Phone frame around vertical reels. */
+/* Phone frame around vertical reels — the mockup itself is exactly 9:16,
+   with the screen filling the bezel. */
 .re-phone {
+  aspect-ratio: 9 / 16;
+  display: flex;
   border: 1px solid rgba(10, 10, 10, .85);
   border-radius: clamp(1.6rem, 2.4vw, 2.4rem);
   padding: clamp(.5rem, .8vw, .75rem);
@@ -338,7 +347,12 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   box-shadow: 0 36px 70px -40px rgba(10, 10, 10, .55);
   position: relative;
 }
-.re-phone .re-video { border-radius: clamp(1.1rem, 1.8vw, 1.8rem); }
+.re-phone .re-video {
+  flex: 1;
+  /* the bezel already sets the 9:16 outline — let the screen fill it */
+  aspect-ratio: auto;
+  border-radius: clamp(1.1rem, 1.8vw, 1.8rem);
+}
 .re-phone::after {
   /* notch pill */
   content: "";
