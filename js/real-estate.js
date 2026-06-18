@@ -29,7 +29,7 @@
       var tick = function (now) {
         if (start === null) start = now;
         var t = Math.min((now - start) / duration, 1);
-        el.textContent = Math.round(ease(t) * target) + suffix;
+        el.textContent = Math.round(ease(t) * target).toLocaleString() + suffix;
         if (t < 1) window.requestAnimationFrame(tick);
       };
       window.requestAnimationFrame(tick);
