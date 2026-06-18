@@ -420,6 +420,30 @@ html.js .re-page [data-stagger].is-visible > * { opacity: 1; transform: none; }
   margin-left: -6px;
 }
 
+/* Mute / unmute toggle (added by real-estate.js to each reel). */
+.re-mute {
+  position: absolute;
+  z-index: 3;
+  right: clamp(.6rem, 1.5vw, 1rem);
+  bottom: clamp(.6rem, 1.5vw, 1rem);
+  width: 38px; height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, .55);
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.re-mute:hover { background: rgba(10, 10, 10, .8); transform: scale(1.06); }
+.re-mute svg { width: 18px; height: 18px; display: none; }
+.re-video.is-muted .re-mute .ic-off { display: block; }
+.re-video:not(.is-muted) .re-mute .ic-on { display: block; }
+
 /* Phone frame around vertical reels. The SCREEN is exactly 9:16 so the reel
    fills it edge-to-edge (no letterbox bars); the bezel wraps it, leaving the
    mockup at a natural just-over-9:16. */
