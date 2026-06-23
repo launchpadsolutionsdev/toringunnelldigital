@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Featured Film (test) | Torin Gunnell Digital</title>
+<link rel="canonical" href="https://toringunnelldigital.com/featured-film/" />
+<meta name="description" content="Test layout for a featured wedding film section — a large 4:3 player with the couple, venue, and the story of the day." />
+
+<!-- STAGING + TEST PAGE: never index this experiment (CLAUDE.md §3). -->
+<meta name="robots" content="noindex, nofollow" />
+
+<meta name="theme-color" content="#f4efe7" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://pub-9759e321dcd74959ab32146accbfa8e2.r2.dev" crossorigin />
+<link rel="preconnect" href="https://player.vimeo.com" />
+<link rel="stylesheet" href="/styles/style.css" />
+
+<!-- ====================================================================
+     SCOPED TEST STYLES
+     Lives here (not in style.css) while we decide if we like the layout.
+     If we keep it, lift this block into styles/style.css as a real
+     component and delete the inline version. (CLAUDE.md §7)
+     ==================================================================== -->
+<style>
+  /* Featured Film — a single hero film given room to breathe:
+     a large 4:3 player paired with an editorial text rail. */
+  .featured-film { padding-block: var(--space-xl); }
+
+  .featured-film .ff-grid {
+    display: grid;
+    /* Player takes the lion's share; the story sits in a calm side rail. */
+    grid-template-columns: minmax(0, 1fr) clamp(17rem, 28%, 28rem);
+    gap: clamp(1.75rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  /* The 4:3 player. Width is driven by its grid column, but we cap it so
+     that on tall/ultrawide screens it never grows past the viewport. */
+  .featured-film .ff-player {
+    width: 100%;
+    max-width: calc((100svh - var(--nav-h) - 8rem) * 4 / 3);
+    margin-inline: auto;
+  }
+  .featured-film .ff-player .video-embed { aspect-ratio: 4 / 3; }
+
+  /* Text rail: eyebrow → couple → venue → story → link. */
+  .featured-film .ff-meta { max-width: 38ch; }
+  .featured-film .ff-eyebrow { display: block; margin-bottom: 1.1rem; }
+  .featured-film .ff-couple {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.05;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    margin: 0;
+  }
+  .featured-film .ff-couple .amp {
+    font-style: italic;
+    color: var(--accent);
+    padding-inline: .12em;
+  }
+  .featured-film .ff-venue {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: .72rem;
+    color: var(--ink-soft);
+    margin: .9rem 0 0;
+  }
+  .featured-film .ff-story {
+    margin-top: 1.6rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .featured-film .ff-story p { font-size: 1.02rem; line-height: 1.85; }
+  .featured-film .ff-link { display: inline-block; margin-top: 1.4rem; }
+
+  /* Stack on smaller screens: full-width player, story beneath. */
+  @media (max-width: 900px) {
+    .featured-film .ff-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+    .featured-film .ff-player { max-width: none; }
+    .featured-film .ff-meta { max-width: 60ch; margin-inline: auto; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER (shared across pages) ===================== -->
+<header class="site-header">
+  <div class="announcement" role="region" aria-label="Announcement">
+    <p>Now Booking 2027–2028 — <a href="/contact/">Inquire Early</a></p>
+    <button class="announcement-close" type="button" aria-label="Dismiss announcement"></button>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-group nav-group--left">
+      <a class="nav-link" href="/wedding-films/">Wedding Films</a>
+      <a class="nav-link" href="/investment/">Investment</a>
+    </div>
+    <a class="brand" href="/" aria-label="Torin Gunnell Digital — home">
+      <span class="brand-logo" aria-hidden="true"></span><span class="visually-hidden">Torin Gunnell Digital</span>
+    </a>
+    <div class="nav-group nav-group--right">
+      <a class="nav-link" href="/who-we-are/">Who We Are</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+      <a class="nav-link nav-link--cta" href="/real-estate/">Real Estate</a>
+    </div>
+    <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <a href="/wedding-films/">Wedding Films</a>
+    <a href="/investment/">Investment</a>
+    <a href="/who-we-are/">Who We Are</a>
+    <a href="/contact/">Contact</a>
+    <a href="/real-estate/">Real Estate</a>
+  </nav>
+  <div class="mobile-meta"><a class="link-underline" href="/contact/">Inquire</a></div>
+</div>
+
+<main id="main">
+
+  <!-- ===================== FEATURED FILM (test) ===================== -->
+  <section class="featured-film container" aria-label="Featured film">
+    <div class="ff-grid">
+
+      <!-- Large 4:3 player. Placeholder uses Caitlyn & Patrick (shot 4:3, so
+           no pillarbox bars). Swap the Vimeo ID to feature a different film. -->
+      <div class="ff-player reveal">
+        <div class="video-embed">
+          <iframe
+            src="https://player.vimeo.com/video/1197720868?title=0&byline=0&portrait=0&dnt=1"
+            title="Caitlyn &amp; Patrick wedding film"
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- The story rail. TODO: real couple, venue, and write-up in Torin's voice. -->
+      <div class="ff-meta reveal">
+        <span class="eyebrow ff-eyebrow">Featured Film</span>
+        <h1 class="ff-couple">Caitlyn <span class="amp">&amp;</span> Patrick</h1>
+        <p class="ff-venue">Le Belvédère · Ottawa Cliffside Wedding Venue</p>
+        <div class="ff-story prose">
+          <p>Caitlyn and Patrick said their vows on the cliffside at Le Belvédère, the Gatineau hills opening up behind them. A warm, golden day — full of the kind of unscripted moments that make a film feel like the day itself, not a highlight of it.</p>
+          <p>This is a placeholder write-up to test the layout. The final version lives here as a few short paragraphs in Torin's voice — the venue, the weather, the people, the feeling.</p>
+        </div>
+        <a class="link-underline ff-link" href="/films/caitlyn-patrick/">Watch the full film</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== SITE FOOTER (shared across pages) ===================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="footer-brand brand" href="/" aria-label="Torin Gunnell Digital — home">
+        <span class="brand-logo" aria-hidden="true"></span><span class="visually-hidden">Torin Gunnell Digital</span>
+      </a>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="/wedding-films/">Wedding Films</a></li>
+            <li><a href="/investment/">Investment</a></li>
+            <li><a href="/who-we-are/">Who We Are</a></li>
+            <li><a href="/real-estate/">Real Estate</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Say hello</h3>
+          <ul>
+            <li><a href="mailto:torin.business.video@gmail.com">Email Torin</a></li>
+            <li><a href="/contact/">Inquiry form</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-social" aria-label="Social media">
+        <a href="#" aria-label="Instagram" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy;<span id="year">2026</span> Torin Gunnell Digital. All rights reserved.</p>
+      <p>Wedding &amp; event films · Thunder Bay, Ontario &amp; beyond.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/scripts.js" defer></script>
+</body>
+</html>
