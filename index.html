@@ -112,15 +112,23 @@
         <p class="lead">I'm a wedding videographer based in Northwestern Ontario. The best films come from collaboration. By taking time to understand your vision, I can create something that feels unmistakably yours.</p>
         <a class="btn" href="/contact/">Get in touch</a>
       </div>
-      <!-- 4:3 player. Placeholder uses Caitlyn & Patrick (shot 4:3, no pillarbox). -->
+      <!-- 4:3 film: autoplays muted as a silent loop; the brass button
+           toggles sound (the click is the gesture browsers require). -->
       <div class="intro-player reveal">
-        <div class="video-embed">
+        <div class="video-embed" data-vol-player>
           <iframe
-            src="https://player.vimeo.com/video/1197720868?title=0&byline=0&portrait=0&dnt=1"
-            title="Caitlyn &amp; Patrick wedding film"
+            data-src="https://player.vimeo.com/video/1204212370?background=1&autoplay=1&muted=1&loop=1&dnt=1"
+            title="Featured wedding film"
             loading="lazy"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen></iframe>
+            allow="autoplay; fullscreen; picture-in-picture"></iframe>
+          <button class="vol-toggle" type="button" aria-pressed="false" aria-label="Unmute video">
+            <svg class="vol-icon vol-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>
+            </svg>
+            <svg class="vol-icon vol-icon--on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+            </svg>
+          </button>
         </div>
       </div>
     </div>

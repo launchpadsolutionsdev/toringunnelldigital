@@ -276,6 +276,63 @@
   });
 
   /* ---------------------------------------------------------------------------
+     Sound-toggle film (.video-embed[data-vol-player]): a Vimeo background loop
+     that autoplays muted, with a custom button to unmute/mute. Uses the Vimeo
+     Player SDK. The iframe loads (data-src -> src) once it nears the viewport.
+  --------------------------------------------------------------------------- */
+  var volPlayers = Array.prototype.slice.call(document.querySelectorAll("[data-vol-player]"));
+  if (volPlayers.length && window.Vimeo && window.Vimeo.Player) {
+    volPlayers.forEach(function (wrap) {
+      var iframe = wrap.querySelector("iframe[data-src]");
+      var btn = wrap.querySelector(".vol-toggle");
+      if (!iframe || !btn) return;
+
+      var player = null;
+      var muted = true;
+
+      var init = function () {
+        if (iframe.dataset.loaded) return;
+        iframe.src = iframe.dataset.src;
+        iframe.dataset.loaded = "1";
+        player = new window.Vimeo.Player(iframe);
+        player.ready().then(function () {
+          player.setMuted(true);
+          var p = player.play();
+          if (p && p.catch) p.catch(function () {});
+        }).catch(function () {});
+      };
+
+      var apply = function () {
+        muted = !muted;
+        player.setMuted(muted).catch(function () {});
+        if (!muted) {
+          player.setVolume(1).catch(function () {});
+          player.play().catch(function () {});
+        }
+        btn.setAttribute("aria-pressed", String(!muted));
+        btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
+      };
+
+      btn.addEventListener("click", function () {
+        if (!player) init();
+        if (player) player.ready().then(apply).catch(function () {});
+      });
+
+      // Lazy-init so it autoplays muted as it scrolls into view.
+      if ("IntersectionObserver" in window) {
+        var pio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { init(); pio.unobserve(entry.target); }
+          });
+        }, { rootMargin: "300px 0px", threshold: 0.01 });
+        pio.observe(wrap);
+      } else {
+        init();
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      Footer year.
   --------------------------------------------------------------------------- */
   var yearEl = document.getElementById("year");

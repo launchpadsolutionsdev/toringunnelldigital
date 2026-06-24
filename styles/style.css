@@ -651,6 +651,31 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 }
 .intro--split .intro-player .video-embed { aspect-ratio: 4 / 3; }
 
+/* Mute/unmute toggle overlaid on the silent autoplay loop. */
+.vol-toggle {
+  position: absolute;
+  right: clamp(.6rem, 1.5vw, 1rem);
+  bottom: clamp(.6rem, 1.5vw, 1rem);
+  z-index: 3;
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  border: 1px solid rgba(244, 239, 231, .4);
+  border-radius: 50%;
+  background: rgba(28, 26, 23, .5);
+  color: var(--paper-on-dark);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.vol-toggle:hover { background: rgba(28, 26, 23, .8); border-color: var(--accent); }
+.vol-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.vol-icon { width: 20px; height: 20px; display: block; }
+/* Default (muted, aria-pressed="false"): show the muted icon. */
+.vol-toggle .vol-icon--on { display: none; }
+.vol-toggle[aria-pressed="true"] .vol-icon--muted { display: none; }
+.vol-toggle[aria-pressed="true"] .vol-icon--on { display: block; }
+
 @media (max-width: 900px) {
   /* Stack: copy first, player beneath. */
   .intro--split .intro-split-grid { grid-template-columns: 1fr; gap: var(--space-md); }
