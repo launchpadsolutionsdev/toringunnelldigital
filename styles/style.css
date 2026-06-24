@@ -632,6 +632,31 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .intro--wide .lead { max-width: 30ch; }
 .intro .btn { margin-top: 2.5rem; }
 
+/* Split intro: copy on the left, a 4:3 film player on the right. */
+.intro--split { padding-block: var(--space-lg); text-align: left; }
+.intro--split .intro-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.intro--split .intro-copy { max-width: 38ch; }
+/* Left-aligned, a touch smaller than the centered full-width lead so it
+   sits in balance beside the player. */
+.intro--split .lead {
+  max-width: none;
+  margin-inline: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  line-height: 1.25;
+}
+.intro--split .intro-player .video-embed { aspect-ratio: 4 / 3; }
+
+@media (max-width: 900px) {
+  /* Stack: copy first, player beneath. */
+  .intro--split .intro-split-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+  .intro--split .intro-copy { max-width: 60ch; }
+}
+
 /* About teaser: image + text side by side. */
 .about-teaser {
   display: grid;
