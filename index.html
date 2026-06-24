@@ -113,7 +113,7 @@
         <a class="btn" href="/contact/">Get in touch</a>
       </div>
       <!-- 4:3 film: rests on a thumbnail; plays (muted) on hover, and the
-           brass button starts it with sound. JS adds the poster + behaviour. -->
+           brass button starts it with sound. JS sets the poster + behaviour. -->
       <div class="intro-player reveal">
         <div class="video-embed" data-vol-player>
           <iframe
@@ -121,6 +121,14 @@
             title="Featured wedding film"
             loading="lazy"
             allow="autoplay; fullscreen; picture-in-picture"></iframe>
+          <div class="video-poster">
+            <span class="play-hint" aria-hidden="true">
+              <span class="play-circle">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span class="play-label">Tap to play</span>
+            </span>
+          </div>
           <button class="vol-toggle" type="button" aria-pressed="false" aria-label="Unmute video">
             <svg class="vol-icon vol-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M11 5 6 9H2v6h4l5 4z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/>

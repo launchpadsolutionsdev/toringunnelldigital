@@ -292,10 +292,13 @@
       var started = false;    // poster hidden / playing
       var committed = false;  // clicked: hover-leave won't revert to the thumbnail
 
-      // Resting thumbnail over the player (fetched from Vimeo's oEmbed).
-      var poster = document.createElement("div");
-      poster.className = "video-poster";
-      iframe.parentNode.insertBefore(poster, iframe.nextSibling);
+      // Resting thumbnail over the player (markup if present, else created).
+      var poster = wrap.querySelector(".video-poster");
+      if (!poster) {
+        poster = document.createElement("div");
+        poster.className = "video-poster";
+        iframe.parentNode.insertBefore(poster, iframe.nextSibling);
+      }
 
       var idMatch = iframe.dataset.src.match(/video\/(\d+)/);
       if (idMatch) {

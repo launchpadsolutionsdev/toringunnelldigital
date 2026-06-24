@@ -636,18 +636,18 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .intro--split { padding-block: var(--space-lg); text-align: left; }
 .intro--split .intro-split-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: clamp(2rem, 6vw, 6rem);
+  /* Equal columns: the bigger copy now carries as much weight as the film. */
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
 }
-.intro--split .intro-copy { max-width: 38ch; }
-/* Left-aligned, a touch smaller than the centered full-width lead so it
-   sits in balance beside the player. */
+/* Big, left-aligned, editorial — sized to fill its column. */
+.intro--split .intro-copy { max-width: 26ch; }
 .intro--split .lead {
   max-width: none;
   margin-inline: 0;
-  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
-  line-height: 1.25;
+  font-size: clamp(1.8rem, 3.4vw, 3.3rem);
+  line-height: 1.18;
 }
 .intro--split .intro-player .video-embed { aspect-ratio: 4 / 3; }
 
@@ -662,6 +662,43 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
   transition: opacity var(--dur) var(--ease);
 }
 [data-vol-player] .video-poster.is-hidden { opacity: 0; pointer-events: none; }
+/* Gentle centre scrim so the play badge stays legible on bright stills. */
+[data-vol-player] .video-poster::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(28,26,23,.32) 0%, rgba(28,26,23,.06) 60%);
+  pointer-events: none;
+}
+
+/* "Tap to play" badge centred on the resting thumbnail. */
+.play-hint {
+  position: absolute; inset: 0; z-index: 1;
+  display: grid; place-content: center; justify-items: center;
+  gap: .9rem;
+  color: var(--paper-on-dark);
+  pointer-events: none;
+  text-shadow: 0 1px 8px rgba(28, 26, 23, .45);
+}
+.play-circle {
+  width: clamp(3.5rem, 6vw, 4.75rem);
+  height: clamp(3.5rem, 6vw, 4.75rem);
+  display: grid; place-items: center;
+  border: 1px solid rgba(244, 239, 231, .8);
+  border-radius: 50%;
+  background: rgba(28, 26, 23, .28);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.play-circle svg { transform: translateX(1px); } /* optically centre the triangle */
+.play-label {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  font-size: .62rem;
+  font-weight: 400;
+}
+/* Subtle lift when hovering the player (before it fades to video). */
+[data-vol-player]:hover .play-circle { background: rgba(28, 26, 23, .5); transform: scale(1.06); }
 
 /* Mute/unmute toggle overlaid on the player. */
 .vol-toggle {
