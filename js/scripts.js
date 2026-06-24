@@ -276,58 +276,106 @@
   });
 
   /* ---------------------------------------------------------------------------
-     Sound-toggle film (.video-embed[data-vol-player]): a Vimeo background loop
-     that autoplays muted, with a custom button to unmute/mute. Uses the Vimeo
-     Player SDK. The iframe loads (data-src -> src) once it nears the viewport.
+     Thumbnail film (.video-embed[data-vol-player]): rests on a Vimeo thumbnail,
+     plays muted on hover (reverts to the thumbnail on leave), and the brass
+     button starts it with sound and keeps it playing. Uses the Vimeo Player SDK.
   --------------------------------------------------------------------------- */
   var volPlayers = Array.prototype.slice.call(document.querySelectorAll("[data-vol-player]"));
   if (volPlayers.length && window.Vimeo && window.Vimeo.Player) {
     volPlayers.forEach(function (wrap) {
       var iframe = wrap.querySelector("iframe[data-src]");
       var btn = wrap.querySelector(".vol-toggle");
-      if (!iframe || !btn) return;
+      if (!iframe) return;
 
       var player = null;
-      var muted = true;
+      var muted = true;       // current sound state
+      var started = false;    // poster hidden / playing
+      var committed = false;  // clicked: hover-leave won't revert to the thumbnail
 
-      var init = function () {
-        if (iframe.dataset.loaded) return;
-        iframe.src = iframe.dataset.src;
-        iframe.dataset.loaded = "1";
-        player = new window.Vimeo.Player(iframe);
-        player.ready().then(function () {
-          player.setMuted(true);
-          var p = player.play();
+      // Resting thumbnail over the player (fetched from Vimeo's oEmbed).
+      var poster = document.createElement("div");
+      poster.className = "video-poster";
+      iframe.parentNode.insertBefore(poster, iframe.nextSibling);
+
+      var idMatch = iframe.dataset.src.match(/video\/(\d+)/);
+      if (idMatch) {
+        fetch("https://vimeo.com/api/oembed.json?url=" +
+              encodeURIComponent("https://vimeo.com/" + idMatch[1]) + "&width=1280")
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data && data.thumbnail_url) {
+              var url = data.thumbnail_url.replace(/-d_\d+x\d+$/, "-d_1280x960");
+              poster.style.backgroundImage = "url('" + url + "')";
+            }
+          }).catch(function () {});
+      }
+
+      // Load the iframe (data-src -> src) and create the SDK player once.
+      var ensure = function () {
+        if (!iframe.dataset.loaded) {
+          iframe.src = iframe.dataset.src;
+          iframe.dataset.loaded = "1";
+          player = new window.Vimeo.Player(iframe);
+          player.ready().then(function () { player.setMuted(true); }).catch(function () {});
+        }
+        return player;
+      };
+
+      var reveal = function () {
+        started = true;
+        poster.classList.add("is-hidden");
+        var pl = ensure();
+        pl.ready().then(function () {
+          var p = pl.play();
           if (p && p.catch) p.catch(function () {});
         }).catch(function () {});
       };
 
-      var apply = function () {
-        muted = !muted;
-        player.setMuted(muted).catch(function () {});
-        if (!muted) {
-          player.setVolume(1).catch(function () {});
-          player.play().catch(function () {});
+      var setMuted = function (next) {
+        var pl = ensure();
+        muted = next;
+        pl.ready().then(function () {
+          pl.setMuted(next);
+          if (!next) { pl.setVolume(1); pl.play().catch(function () {}); }
+        }).catch(function () {});
+        if (btn) {
+          btn.setAttribute("aria-pressed", String(!next));
+          btn.setAttribute("aria-label", next ? "Unmute video" : "Mute video");
         }
-        btn.setAttribute("aria-pressed", String(!muted));
-        btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
       };
 
-      btn.addEventListener("click", function () {
-        if (!player) init();
-        if (player) player.ready().then(apply).catch(function () {});
+      // Hover preview (muted); revert to the thumbnail on leave unless committed.
+      wrap.addEventListener("mouseenter", function () { reveal(); });
+      wrap.addEventListener("mouseleave", function () {
+        if (committed || !player) return;
+        poster.classList.remove("is-hidden");
+        started = false;
+        player.pause().catch(function () {});
       });
 
-      // Lazy-init so it autoplays muted as it scrolls into view.
+      // Tap the thumbnail: start muted and keep it (touch-friendly).
+      poster.addEventListener("click", function () { committed = true; reveal(); });
+
+      // Volume button: reveal, keep it playing, and toggle sound.
+      if (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          committed = true;
+          if (!started) reveal();
+          setMuted(!muted);
+        });
+      }
+
+      // Warm up the player as it nears the viewport (no autoplay — poster stays).
       if ("IntersectionObserver" in window) {
         var pio = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
-            if (entry.isIntersecting) { init(); pio.unobserve(entry.target); }
+            if (entry.isIntersecting) { ensure(); pio.unobserve(entry.target); }
           });
         }, { rootMargin: "300px 0px", threshold: 0.01 });
         pio.observe(wrap);
       } else {
-        init();
+        ensure();
       }
     });
   }

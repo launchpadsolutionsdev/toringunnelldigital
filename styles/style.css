@@ -651,7 +651,19 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 }
 .intro--split .intro-player .video-embed { aspect-ratio: 4 / 3; }
 
-/* Mute/unmute toggle overlaid on the silent autoplay loop. */
+/* Resting thumbnail over the player; fades out on hover/click (set by JS). */
+[data-vol-player] .video-poster {
+  position: absolute; inset: 0; z-index: 2;
+  background-color: var(--dark);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--dur) var(--ease);
+}
+[data-vol-player] .video-poster.is-hidden { opacity: 0; pointer-events: none; }
+
+/* Mute/unmute toggle overlaid on the player. */
 .vol-toggle {
   position: absolute;
   right: clamp(.6rem, 1.5vw, 1rem);
