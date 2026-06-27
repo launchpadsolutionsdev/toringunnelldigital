@@ -11,10 +11,19 @@
 # Clean folder URLs (/contact/, /wedding-films/, etc.) are served automatically
 # by Render from each folder's index.html — those don't need an entry here.
 #
-# TODO: replace the examples below with the real old → new mappings.
+# Mappings below are built from the live Wix page inventory (SEO Settings →
+# Main Pages). Old Wix paths used no trailing slash; the new site serves folder
+# URLs with a trailing slash.
 # -----------------------------------------------------------------------------
 
-# /portfolio        /wedding-films/    301
-# /pricing          /investment/       301
-# /about            /who-we-are/       301
-# /contact-us       /contact/          301
+# Old Wix path           New path                301
+/wedding-videography     /wedding-films/         301
+/about-me                /who-we-are/            301
+/allthethings            /all-the-things/        301
+/search                  /                       301
+/blog                    /                        301
+
+# Same-topic page kept at the SAME URL on the new site (no redirect needed):
+#   /wedding-photography  → served by /wedding-photography/index.html
+#   /contact              → served by /contact/index.html
+#   /                     → served by /index.html
