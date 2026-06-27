@@ -452,6 +452,24 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Accordion ([data-accordion]): native <details> panels, but opening one
+     closes its siblings. Degrades gracefully — without JS each panel still
+     opens/closes on its own.
+  --------------------------------------------------------------------------- */
+  var accordions = Array.prototype.slice.call(document.querySelectorAll("[data-accordion]"));
+  accordions.forEach(function (group) {
+    var items = Array.prototype.slice.call(group.querySelectorAll("details"));
+    items.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (!item.open) return;
+        items.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  });
+
+  /* ---------------------------------------------------------------------------
      Footer year.
   --------------------------------------------------------------------------- */
   var yearEl = document.getElementById("year");
