@@ -16,4 +16,4 @@ Disallow: /
 # User-agent: *
 # Allow: /
 #
-# Sitemap: https://toringunnelldigital.com/sitemap.xml
+# Sitemap: https://www.toringunnelldigital.com/sitemap.xml
