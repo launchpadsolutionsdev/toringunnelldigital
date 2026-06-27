@@ -452,6 +452,22 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Gallery ([data-gallery-img]): hide any slot whose image fails to load, so a
+     fixed set of sequentially-named files (gallery-01.jpg, -02.jpg, …) renders
+     however many actually exist — no broken-image icons for empty slots.
+  --------------------------------------------------------------------------- */
+  var galleryImgs = Array.prototype.slice.call(document.querySelectorAll("[data-gallery-img]"));
+  galleryImgs.forEach(function (img) {
+    var hide = function () {
+      var fig = img.closest("figure") || img;
+      fig.style.display = "none";
+    };
+    // Already errored before this script ran.
+    if (img.complete && img.naturalWidth === 0) hide();
+    img.addEventListener("error", hide);
+  });
+
+  /* ---------------------------------------------------------------------------
      Accordion ([data-accordion]): native <details> panels, but opening one
      closes its siblings. Degrades gracefully — without JS each panel still
      opens/closes on its own.
