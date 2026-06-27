@@ -1108,6 +1108,20 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .featured-player { max-width: 1100px; margin-inline: auto; }
 .featured-player .video-embed { box-shadow: 0 30px 80px -40px rgba(28, 26, 23, .5); }
 
+/* Photography gallery: CSS-columns masonry. Keeps each photo's natural shape
+   (no cropping) so portrait + landscape mix gracefully. JS hides empty slots. */
+.gallery-masonry { column-count: 3; column-gap: clamp(.6rem, 1.5vw, 1rem); }
+.gallery-masonry figure {
+  break-inside: avoid;
+  margin: 0 0 clamp(.6rem, 1.5vw, 1rem);
+}
+.gallery-masonry img {
+  width: 100%; height: auto; display: block;
+  background: var(--bg-deep);
+}
+@media (max-width: 900px) { .gallery-masonry { column-count: 2; } }
+@media (max-width: 560px) { .gallery-masonry { column-count: 1; } }
+
 /* Deliverables: single sticky media beside a collapsible accordion. */
 .deliverables-feature .split-media { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
 
