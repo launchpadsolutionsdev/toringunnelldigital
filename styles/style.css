@@ -1108,6 +1108,66 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transform: none; }
 .featured-player { max-width: 1100px; margin-inline: auto; }
 .featured-player .video-embed { box-shadow: 0 30px 80px -40px rgba(28, 26, 23, .5); }
 
+/* Deliverables: single sticky media beside a collapsible accordion. */
+.deliverables-feature .split-media { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+
+.accordion { margin-top: 1.75rem; border-top: 1px solid var(--line); }
+.accordion details { border-bottom: 1px solid var(--line); }
+.accordion summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: clamp(.85rem, 2vw, 1.25rem);
+  padding: 1.35rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.2;
+  transition: color var(--dur) var(--ease);
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary:hover { color: var(--accent); }
+.accordion summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.accordion .acc-num {
+  flex: none;
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  color: var(--accent);
+}
+.accordion .acc-title { flex: 1; }
+
+/* Plus icon that becomes a minus when the panel is open. */
+.accordion .acc-icon { flex: none; position: relative; width: 1rem; height: 1rem; }
+.accordion .acc-icon::before,
+.accordion .acc-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  background: currentColor;
+}
+.accordion .acc-icon::before { width: 1rem; height: 1px; transform: translate(-50%, -50%); }
+.accordion .acc-icon::after {
+  width: 1px; height: 1rem;
+  transform: translate(-50%, -50%);
+  transition: transform var(--dur) var(--ease);
+}
+.accordion details[open] .acc-icon::after { transform: translate(-50%, -50%) scaleY(0); }
+
+.accordion .acc-body { padding: 0 0 1.6rem; max-width: 52ch; }
+.accordion .acc-body p {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-ui);
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  /* No sticky media when the layout stacks. */
+  .deliverables-feature .split-media { position: static; }
+}
+
 /* ---- Contact ---- */
 .contact-grid {
   display: grid;
