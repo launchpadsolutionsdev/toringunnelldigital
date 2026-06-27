@@ -384,6 +384,74 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Autoplaying featured film (.video-embed[data-vol-autoplay]): starts muted
+     and looping as it enters the viewport (browsers only allow muted autoplay),
+     pauses when it scrolls away, and the brass button toggles sound on/off.
+     Uses the Vimeo Player SDK.
+  --------------------------------------------------------------------------- */
+  var autoPlayers = Array.prototype.slice.call(document.querySelectorAll("[data-vol-autoplay]"));
+  if (autoPlayers.length && window.Vimeo && window.Vimeo.Player) {
+    autoPlayers.forEach(function (wrap) {
+      var iframe = wrap.querySelector("iframe[data-src]");
+      var btn = wrap.querySelector(".vol-toggle");
+      if (!iframe) return;
+
+      var player = null;
+      var muted = true;
+
+      // Load the iframe (data-src -> src) and create the SDK player once.
+      var ensure = function () {
+        if (!iframe.dataset.loaded) {
+          iframe.src = iframe.dataset.src;
+          iframe.dataset.loaded = "1";
+          player = new window.Vimeo.Player(iframe);
+          player.ready().then(function () { player.setMuted(true); }).catch(function () {});
+        }
+        return player;
+      };
+
+      var setMuted = function (next) {
+        var pl = ensure();
+        muted = next;
+        pl.ready().then(function () {
+          pl.setMuted(next);
+          if (!next) pl.setVolume(1);
+          pl.play().catch(function () {});
+        }).catch(function () {});
+        if (btn) {
+          btn.setAttribute("aria-pressed", String(!next));
+          btn.setAttribute("aria-label", next ? "Unmute video" : "Mute video");
+        }
+      };
+
+      if (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          setMuted(!muted);
+        });
+      }
+
+      // Autoplay (muted) when near the viewport; pause when it leaves so sound
+      // never plays from off-screen.
+      if ("IntersectionObserver" in window) {
+        var apio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var pl = ensure();
+            pl.ready().then(function () {
+              if (entry.isIntersecting) pl.play().catch(function () {});
+              else pl.pause().catch(function () {});
+            }).catch(function () {});
+          });
+        }, { rootMargin: "200px 0px", threshold: 0.01 });
+        apio.observe(wrap);
+      } else {
+        var pl0 = ensure();
+        pl0.ready().then(function () { pl0.play().catch(function () {}); }).catch(function () {});
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      Footer year.
   --------------------------------------------------------------------------- */
   var yearEl = document.getElementById("year");
